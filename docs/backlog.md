@@ -24,7 +24,7 @@ Backlog priorise. Source de verite pour "qu'est-ce qu'on fait ensuite".
 - [ ] **Email confirmation paiement** — brancher l'envoi Resend reel apres webhook Stripe (template ConfirmationPaiement.tsx existe deja). C'est la livraison du produit — critique.
 - [ ] **Tester le flow complet avec vraies cles API** — upload photo reelle → extraction Claude Vision → scoring → paiement Stripe test → pack → email.
 - [ ] **Webhook Stripe en production** — creer l'endpoint dans le dashboard Stripe (URL : `https://conteste.app/api/webhook`, event : `payment_intent.succeeded`).
-- [ ] **Google Search Console** — verifier le domaine, soumettre le sitemap (516 pages).
+- [x] **Google Search Console** — `done` — domaine vérifié, sitemap soumis (497 pages découvertes, traitement réussi).
 - [ ] **Tests E2E** — flow complet sur iPhone Safari + Chrome Android.
 - [ ] **Pages legales** — verifier le contenu CGU, mentions legales, confidentialite (pages creees mais contenu a valider).
 
