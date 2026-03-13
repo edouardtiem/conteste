@@ -26,6 +26,12 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Conteste.app — Contestez vos amendes en ligne",
+    description:
+      "Analysez gratuitement vos chances de contester une amende. Score instantane et guide personnalise.",
+  },
 };
 
 export const viewport: Viewport = {

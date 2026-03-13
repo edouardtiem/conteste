@@ -36,6 +36,11 @@ export function generateMetadata({ params }: PageProps): Metadata {
       locale: "fr_FR",
       type: "article",
     },
+    twitter: {
+      card: "summary",
+      title: `Contester une ${type.label} — Guide complet`,
+      description: `Délai de ${type.delaiJours} jours, montant ${type.montantForfaitaire} €. Guide complet pour contester.`,
+    },
     alternates: {
       canonical: `https://conteste.app/guides/${type.slug}`,
     },

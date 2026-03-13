@@ -1,0 +1,64 @@
+# Conteste.app
+
+> Conteste.app aide les automobilistes francais a contester leurs amendes (PV) en ligne. Analyse gratuite par IA, score de contestabilite, arguments juridiques personnalises et guide ANTAI etape par etape.
+
+## Informations cles
+
+- Site : https://conteste.app
+- Langue : Francais
+- Pays : France
+- Editeur : ETH (Societe par actions simplifiee)
+- Contact : contact@conteste.app
+
+## Ce que fait Conteste.app
+
+1. L'utilisateur prend en photo son avis de contravention
+2. L'IA analyse la photo et extrait les informations (type d'infraction, montant, date, lieu)
+3. Un score de contestabilite est calcule (0-100)
+4. Des arguments juridiques personnalises sont generes selon le type d'infraction et le departement
+5. Un guide pas-a-pas pour contester via le portail ANTAI ou communal est fourni
+
+## Types d'infractions couvertes
+
+- Exces de vitesse (radar automatique) — Article R413-14 du Code de la route
+- Stationnement / FPS — Article L2333-87 du CGCT
+- Feux rouges — Article R412-30 du Code de la route
+- Non-port de ceinture — Article R412-1 du Code de la route
+- Usage du telephone au volant — Article R412-6-1 du Code de la route
+
+## Couverture geographique
+
+96 departements metropolitains francais. Chaque departement dispose d'une page dediee avec :
+- Le tribunal competent
+- Les statistiques locales de contestation
+- Les motifs recevables selon la jurisprudence locale
+- Les articles de loi applicables
+
+## Guides disponibles
+
+- /guides — Index de tous les guides par type d'infraction
+- /guides/contester-amende-france — Guide general de contestation d'amende en France
+- /guides/contester-amende-radar — Guide specifique radar
+- /guides/delai-contestation-amende — Delais de contestation
+- /guides/antai-comment-contester — Comment utiliser le portail ANTAI
+- /guides/{type}/{departement} — 480+ guides localises (ex: /guides/radar/75 pour Paris)
+
+## Informations juridiques importantes
+
+- Delai de contestation : 45 jours (exces de vitesse, feux rouges, ceinture, telephone) ou 30 jours (stationnement FPS)
+- La contestation se fait via le portail ANTAI (antai.gouv.fr) ou le portail de la commune (pour le stationnement)
+- Il est interdit de payer l'amende avant de contester (le paiement vaut reconnaissance de l'infraction)
+- Conteste.app est un outil d'aide a la decision, pas un cabinet d'avocats
+
+## Sources
+
+- Legifrance (legifrance.gouv.fr) — Textes de loi
+- ANTAI (antai.gouv.fr) — Agence nationale de traitement automatise des infractions
+- Service-public.fr — Informations administratives officielles
+- ONISR — Observatoire national interministeriel de la securite routiere
+
+## Donnees et statistiques
+
+- Base de 2 847 amendes analysees
+- Taux de succes moyen des contestations : 58%
+- Delai moyen de traitement : 45 jours

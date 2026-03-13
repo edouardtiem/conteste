@@ -49,6 +49,11 @@ export function generateMetadata({ params }: PageProps): Metadata {
       locale: "fr_FR",
       type: "article",
     },
+    twitter: {
+      card: "summary",
+      title: `Contester une ${type.label} dans le ${dept.nom} (${dept.code})`,
+      description: `Tribunal : ${dept.tribunal}. Délai : ${type.delaiJours} jours. Guide complet.`,
+    },
     alternates: {
       canonical: `https://conteste.app/guides/${type.slug}/${dept.code}`,
     },
