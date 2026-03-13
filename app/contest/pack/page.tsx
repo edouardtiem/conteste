@@ -34,6 +34,7 @@ function PackPageContent() {
   const [error, setError] = useState<string | null>(null);
   const [emailSending, setEmailSending] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
+  const [autoEmailTriggered, setAutoEmailTriggered] = useState(false);
 
   const dossierId = searchParams.get("dossierId") || (typeof window !== "undefined" ? localStorage.getItem("conteste_dossier_id") : null) || "";
   const email = searchParams.get("email") || (typeof window !== "undefined" ? localStorage.getItem("conteste_email") : null) || "";
@@ -95,8 +96,8 @@ function PackPageContent() {
   }, [dossierId, getAmendeFromStorage]);
 
   // Envoyer par email
-  const handleSendEmail = async () => {
-    if (!email || !pack) return;
+  const sendEmail = useCallback(async (packData: PackResult) => {
+    if (!email || emailSending) return;
 
     setEmailSending(true);
     try {
@@ -108,7 +109,7 @@ function PackPageContent() {
         body: JSON.stringify({
           email,
           dossierId,
-          pack,
+          pack: packData,
           amende,
         }),
       });
@@ -125,13 +126,20 @@ function PackPageContent() {
       const isDemo = typeof window !== "undefined" && localStorage.getItem("conteste_paid") === "true";
       if (isDemo) {
         setEmailSent(true);
-      } else {
-        setError("Erreur d'envoi");
       }
+      // En cas d'erreur auto-send, ne pas bloquer l'UI — le bouton reste disponible
     } finally {
       setEmailSending(false);
     }
-  };
+  }, [email, dossierId, emailSending, getAmendeFromStorage]);
+
+  // Auto-envoyer l'email dès que le pack est prêt
+  useEffect(() => {
+    if (pack && email && !emailSent && !autoEmailTriggered) {
+      setAutoEmailTriggered(true);
+      sendEmail(pack);
+    }
+  }, [pack, email, emailSent, autoEmailTriggered, sendEmail]);
 
   // Loading
   if (loading) {
@@ -229,8 +237,8 @@ function PackPageContent() {
       {/* Envoyer par email */}
       {email && (
         <button
-          onClick={handleSendEmail}
-          disabled={emailSending || emailSent}
+          onClick={() => { setEmailSent(false); sendEmail(pack); }}
+          disabled={emailSending}
           className={`block w-full text-center font-bold text-button py-[14px] rounded-button transition-colors min-h-[48px] mb-6 ${
             emailSent
               ? "bg-vert-succes text-white"
@@ -241,7 +249,7 @@ function PackPageContent() {
             ? "\u2713 Email envoye !"
             : emailSending
               ? "Envoi en cours..."
-              : "Recevoir par email"}
+              : "Renvoyer par email"}
         </button>
       )}
 

@@ -21,9 +21,9 @@ Backlog priorise. Source de verite pour "qu'est-ce qu'on fait ensuite".
 
 ## P1 — Lancement credible
 
-- [ ] **Email confirmation paiement** — brancher l'envoi Resend reel apres webhook Stripe (template ConfirmationPaiement.tsx existe deja). C'est la livraison du produit — critique.
+- [x] **Email confirmation paiement** — `done` — auto-envoi Resend dès que le pack se charge (plus besoin de clic), bouton "Renvoyer" disponible. Template, route API, logging DB tous opérationnels.
 - [ ] **Tester le flow complet avec vraies cles API** — upload photo reelle → extraction Claude Vision → scoring → paiement Stripe test → pack → email.
-- [ ] **Webhook Stripe en production** — creer l'endpoint dans le dashboard Stripe (URL : `https://conteste.app/api/webhook`, event : `payment_intent.succeeded`).
+- [x] **Webhook Stripe en production** — `done` — endpoint créé via API (`https://www.conteste.app/api/webhook`, event `payment_intent.succeeded`), secret mis à jour sur Vercel, paiement test validé. Note : clés encore en mode test, passage en live requis.
 - [x] **Google Search Console** — `done` — domaine vérifié, sitemap soumis (497 pages découvertes, traitement réussi).
 - [ ] **Tests E2E** — flow complet sur iPhone Safari + Chrome Android.
 - [ ] **Pages legales** — verifier le contenu CGU, mentions legales, confidentialite (pages creees mais contenu a valider).
@@ -47,4 +47,4 @@ Backlog priorise. Source de verite pour "qu'est-ce qu'on fait ensuite".
 
 ---
 
-*Dernière mise à jour : 2026-03-13 (checkpoint — P0 SEO anti-déréférencement terminé)*
+*Dernière mise à jour : 2026-03-13 (session 2 — email auto-send + webhook Stripe configuré)*
