@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import Link from "next/link";
 import "./globals.css";
 
@@ -30,14 +31,13 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
   themeColor: "#000091",
 };
 
 function Header() {
   return (
     <header className="bg-white border-b-[3px] border-bleu-france">
-      <div className="container-landing flex items-center gap-3 py-3">
+      <div className="container-landing flex items-center justify-between py-3">
         <Link href="/" className="flex items-center gap-3">
           <div className="w-[44px] h-[44px] bg-bleu-france rounded-sm flex items-center justify-center text-white font-bold text-sm">
             RF
@@ -51,6 +51,26 @@ function Header() {
             </div>
           </div>
         </Link>
+        <nav className="flex items-center gap-6">
+          <Link
+            href="/guides"
+            className="hidden min-[500px]:inline-flex items-center min-h-[44px] text-[14px] text-gris-texte hover:text-bleu-france transition-colors"
+          >
+            Guides
+          </Link>
+          <Link
+            href="/stats"
+            className="hidden min-[500px]:inline-flex items-center min-h-[44px] text-[14px] text-gris-texte hover:text-bleu-france transition-colors"
+          >
+            Statistiques
+          </Link>
+          <Link
+            href="/contest/upload"
+            className="inline-flex items-center min-h-[44px] bg-bleu-france hover:bg-bleu-france-hover text-white text-[13px] font-bold px-[16px] py-[8px] rounded-button transition-colors"
+          >
+            Analyser mon amende
+          </Link>
+        </nav>
       </div>
     </header>
   );
@@ -61,18 +81,18 @@ function Footer() {
     <footer className="bg-gris-fond border-t border-gris-bordure mt-auto">
       <div className="container-landing py-6">
         <div className="flex flex-wrap gap-4 text-[14px] text-gris-mention mb-4">
-          <a href="#" className="hover:text-bleu-france">
+          <Link href="/mentions-legales" className="hover:text-bleu-france">
             Mentions legales
-          </a>
-          <a href="#" className="hover:text-bleu-france">
+          </Link>
+          <Link href="/cgu" className="hover:text-bleu-france">
             CGU
-          </a>
-          <a href="#" className="hover:text-bleu-france">
+          </Link>
+          <Link href="/confidentialite" className="hover:text-bleu-france">
             Confidentialite
-          </a>
-          <a href="#" className="hover:text-bleu-france">
+          </Link>
+          <Link href="/contact" className="hover:text-bleu-france">
             Contact
-          </a>
+          </Link>
         </div>
         <p className="text-[12px] text-gris-mention">
           Conteste.app est un outil d&apos;aide a la decision. Ce n&apos;est
@@ -91,6 +111,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-799H6MS6RD"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-799H6MS6RD');
+          `}
+        </Script>
+      </head>
       <body className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1">{children}</main>
