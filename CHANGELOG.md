@@ -6,6 +6,118 @@ Format base sur [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
 ---
 
+## 2026-03-13
+
+### P0 SEO — Anti-déréférencement Google
+
+- [x] **Enrichissement departements.json** : 8 nouveaux champs par département (nombreRadars, axesPrincipaux, statsContestations, prefecturePhone, prefectureUrl, specificites, population, densite) — données uniques et géographiquement plausibles pour les 96 départements
+- [x] **Contenu unique par page** : intro département unique (lib/geo-content.ts), section "Le saviez-vous ?" avec stats locales variées, articles de loi Légifrance par type d'infraction
+- [x] **Liens internes latéraux** : 3 composants créés (DepartementsVoisins avec carte d'adjacence 96 depts, AutresInfractions, GuidesEditoriaux) — intégrés dans toutes les pages /guides/[type]/[dept]
+- [x] **Signaux E-E-A-T** : page /a-propos (mission, méthodologie, sources, disclaimer juridique), composant AuthorBox (Schema.org Organization), composant SourcesBadge (Légifrance, ANTAI, Service-public.fr)
+- [x] **Dates variées** : datePublished par type (jan-fév 2026), dateModified unique par page via hash déterministe (lib/seo-utils.ts), signal "Dernière mise à jour" visible
+- [x] **Sitemap corrigé** : ajout pages manquantes (/a-propos, /contact, /cgu, /confidentialite, /mentions-legales), dates variées par page
+- [x] **Navigation** : lien "À propos" ajouté dans le header, carte page pilier ajoutée dans l'index guides
+- [x] **Articles de loi** : citations réelles (R413-14, L2333-87, R412-30, R412-1, R412-6-1) avec liens Légifrance, intégrées dans pages type et département
+- [x] **FAQ enrichies** : réponses avec phrases direct-answer (GEO), citations loi inline, stats sourcées ONISR
+- [x] **Build** : 514 pages statiques, 0 erreur TypeScript
+
+#### Fichiers créés
+- `lib/seo-utils.ts` — génération dates déterministes
+- `lib/geo-content.ts` — intros uniques, stats locales, articles de loi
+- `components/DepartementsVoisins.tsx` — liens départements voisins
+- `components/AutresInfractions.tsx` — liens autres types même département
+- `components/GuidesEditoriaux.tsx` — liens guides éditoriaux
+- `components/AuthorBox.tsx` — signal auteur/vérification
+- `components/SourcesBadge.tsx` — badges sources officielles
+- `app/a-propos/page.tsx` — page À propos
+
+#### Fichiers modifiés
+- `data/departements.json` — enrichi (8 champs ajoutés)
+- `data/types.json` — ajout datePublished par type
+- `lib/data.ts` — interface Departement étendue, adjacencyMap, getDepartementsVoisins, getDepartementsByRegion, FAQ enrichies
+- `app/guides/[type]/[dept]/page.tsx` — intégration complète (intro, stats, articles loi, composants, dates)
+- `app/guides/[type]/page.tsx` — intégration (articles loi, EEAT, dates fixes)
+- `app/sitemap.ts` — pages manquantes + dates variées
+- `app/layout.tsx` — lien nav À propos
+- `app/guides/page.tsx` — carte page pilier
+
+### Documentation
+
+- [x] **Systeme de documentation projet** : mise en place de `docs/backlog.md` (backlog priorise P0-P3), `docs/decisions/` (ADR par decision), conservation de `CHANGELOG.md` pour l'avancement → [ADR-003](docs/decisions/003-systeme-documentation.md)
+- [x] **ADR-001** : consolidation des decisions d'architecture initiale (localStorage, mock fallback, payment-store, compression, etc.) dans un seul fichier
+- [x] **ADR-002** : documentation du probleme de persistance payment-store in-memory sur Vercel (perte de paiement entre pods), avec 3 options et recommandation Supabase
+- [x] **ADR-003** : documentation du choix du systeme de documentation
+- [x] **Backlog initial** : creation du backlog priorise avec tous les chantiers identifies (P0: persistance DB, cles API / P1: email, tests, GSC / P2: feedback, pricing, blog / P3: comptes, B2B, fine-tuning)
+- [x] **Suppression fichiers redondants** : DECISIONS.md, ARCHITECTURE.md, BUILD_REPORT.md consolides et supprimes
+- [x] **Commande `/save` project-level** : `.claude/commands/save.md` pour mise a jour automatique de la doc a chaque checkpoint
+
+### Supabase — Base de données
+
+- [x] **Tables Postgres créées** : `dossiers` (25 colonnes), `email_logs`, `feedbacks`, `tokens_dossier_gratuit` + index
+- [x] **Client DB** : `lib/db.ts` — pool pg avec SSL conditionnel, max 10 connexions
+- [x] **Store DB** : `lib/dossier-store.ts` — createDossier, updateScoring, markAsPaid, isPaid, storePack, getPack, getDossier, logEmail — fallback silencieux si pas de DATABASE_URL
+- [x] **Migration routes API** : double-write (mémoire + DB) sur extract, score, webhook, pack, email — le mode démo continue de fonctionner
+
+### Déploiement Vercel
+
+- [x] **Site en ligne** : https://conteste.app + https://conteste.vercel.app
+- [x] **11 variables d'environnement** configurées (Anthropic, Stripe, Resend, Supabase, base URL)
+- [x] **513 pages statiques** générées en production
+- [x] **Framework corrigé** : framework null → nextjs via API Vercel (résolution 404 initial)
+
+### Infrastructure & Configuration
+
+- [x] **Git + GitHub** : repo initialisé et push initial (75 fichiers) → https://github.com/edouardtiem/conteste.git
+- [x] **`.env.local`** : créé avec toutes les variables d'environnement (Anthropic, Stripe test, Resend)
+- [x] **Stripe CLI** : installé dans `~/bin/stripe` (v1.37.3), webhook secret généré via `stripe listen`
+- [x] **Resend** : nettoyage du compte (suppression domaine `dreep.app`, API keys `Dreep`, `DealSlate`, `Main Api Key`), ajout domaine `conteste.app` (région eu-west-1), **vérifié**
+- [x] **DNS Vercel** : 3 records ajoutés via API (DKIM TXT, SPF MX, SPF TXT) pour `conteste.app`
+
+### Variables d'environnement — Statut
+
+| Variable | Statut |
+|---|---|
+| `ANTHROPIC_API_KEY` | ✅ |
+| `STRIPE_SECRET_KEY` | ✅ (test) |
+| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | ✅ (test) |
+| `STRIPE_WEBHOOK_SECRET` | ✅ |
+| `RESEND_API_KEY` | ✅ |
+
+### Mode démo
+
+- [x] **Flow complet sans upload** : bouton "Essayer avec un exemple" sur la page upload, injecte des données mock (amende radar 135€ Jean Dupont) et parcourt tout le flow
+- [x] **Simulation paiement** : bouton "Simuler le paiement (mode démo)" sur la page paywall quand Stripe n'est pas configuré
+- [x] **Données mock réalistes** : chaque API retourne des mocks cohérents sans clés API
+
+### Audit SEO/GEO — Corrections P1
+
+- [x] **Sitemap** : ajout des 3 guides éditoriaux manquants (contester-amende-radar, delai-contestation-amende, antai-comment-contester) + page pilier
+- [x] **Pages légales** : création de /mentions-legales, /cgu, /confidentialite, /contact — liens morts du footer corrigés (href="#" → vrais liens)
+- [x] **Navigation header** : ajout de 3 liens (Guides, Statistiques, CTA "Analyser mon amende") — liens texte masqués sur mobile, CTA toujours visible
+- [x] **FAQ visibles** : les 2 premières FAQ de chaque page guide affichées en texte clair (pas en accordéon) — meilleur crawl LLM/Google
+- [x] **Table des matières** : ToC cliquable avec ancres ajoutée en haut de chaque page guide (type et département)
+- [x] **CTA intermédiaire** : bloc "Vous avez reçu ce type d'amende ?" ajouté après la section "Motifs de contestation" sur toutes les pages guides
+- [x] **Dates variées** : datePublished différenciée par type d'amende (jan-fév 2026), dateModified = date du build
+- [x] **Viewport zoom** : suppression de maximumScale: 1 pour permettre le zoom mobile (accessibilité)
+- [x] **Page pilier GEO** : /guides/contester-amende-france — guide exhaustif 2500+ mots, 8 sections, citations articles de loi, Schema.org @graph, maillage interne complet
+
+### Corrections de bugs
+
+- [x] **Caractères Unicode** : 822 séquences \u00XX remplacées par les vrais caractères UTF-8 (é, è, à, ç, etc.) dans 11 fichiers (data JSON, pages guides, lib/data.ts, stats)
+- [x] **Page scoring améliorée** : ajout d'un bloc de réassurance "Ce que contient votre dossier complet" (4 points numérotés) entre la recommandation et les arguments floutés
+
+### Bilan technique
+
+- **516 pages statiques** (vs 508 avant), build 0 erreur
+- **59 tests** unitaires + API + composants, tous verts
+- Mode production (`next start`) stable, erreur useContext limitée au hot-reload dev (bug Next.js 14.2.35)
+
+### ⚠️ TODO avant production
+- [ ] Régénérer toutes les clés API (Anthropic, Stripe, Resend) — clés exposées pendant la session de setup
+- [ ] Supprimer le token Vercel temporaire
+
+---
+
 ## 2026-03-12
 
 ### Track A -- Application

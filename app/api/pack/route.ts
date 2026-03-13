@@ -1,12 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { PackResult, AmendeExtracted } from "@/lib/types";
 import {
-  isPaid,
+  isPaid as memoryIsPaid,
   isPackGenerated,
   markPackGenerated,
   getStoredPack,
-  storePack,
+  storePack as memoryStorePack,
 } from "@/lib/payment-store";
+import {
+  isPaid as dbIsPaid,
+  getPack as dbGetPack,
+  storePack as dbStorePack,
+} from "@/lib/dossier-store";
+import { trackEvent, getClientIdFromCookie } from "@/lib/analytics";
 
 /**
  * Mock réaliste pour le dev sans clé API.
@@ -205,8 +211,10 @@ export async function POST(request: NextRequest) {
 
     const isDev = process.env.NODE_ENV === "development";
 
-    // SECURITE CRITIQUE : vérifier le paiement
-    if (!isDev && !isPaid(body.dossierId)) {
+    // SECURITE CRITIQUE : vérifier le paiement (check both stores)
+    const paidMemory = memoryIsPaid(body.dossierId);
+    const paidDb = await dbIsPaid(body.dossierId);
+    if (!isDev && !paidMemory && !paidDb) {
       return NextResponse.json(
         { success: false, error: "Paiement non verifie pour ce dossier" },
         { status: 403 }
@@ -214,6 +222,14 @@ export async function POST(request: NextRequest) {
     }
 
     // Idempotence : si pack déjà généré, le retourner
+    // Check DB first, then memory
+    const dbPack = await dbGetPack(body.dossierId);
+    if (dbPack) {
+      return NextResponse.json({
+        success: true,
+        data: dbPack,
+      });
+    }
     if (isPackGenerated(body.dossierId)) {
       const existingPack = getStoredPack(body.dossierId);
       if (existingPack) {
@@ -234,9 +250,20 @@ export async function POST(request: NextRequest) {
       pack = getMockPack();
     }
 
-    // Stocker le pack
-    storePack(body.dossierId, pack);
+    // Stocker le pack (both stores)
+    memoryStorePack(body.dossierId, pack);
     markPackGenerated(body.dossierId);
+    try {
+      await dbStorePack(body.dossierId, pack);
+    } catch (err) {
+      console.error("[pack] dbStorePack error:", err);
+    }
+
+    const clientId = getClientIdFromCookie(request.headers.get("cookie"));
+    trackEvent("pack_generated", {
+      arguments_count: pack.arguments.length,
+      amende_type: body.amende?.type || "",
+    }, clientId);
 
     return NextResponse.json({
       success: true,

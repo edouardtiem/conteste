@@ -35,7 +35,7 @@ function PackPageContent() {
   const [emailSending, setEmailSending] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
 
-  const dossierId = searchParams.get("dossierId") || (typeof window !== "undefined" ? localStorage.getItem("conteste_dossierId") : null) || "";
+  const dossierId = searchParams.get("dossierId") || (typeof window !== "undefined" ? localStorage.getItem("conteste_dossier_id") : null) || "";
   const email = searchParams.get("email") || (typeof window !== "undefined" ? localStorage.getItem("conteste_email") : null) || "";
 
   // Récupérer les données amende depuis localStorage

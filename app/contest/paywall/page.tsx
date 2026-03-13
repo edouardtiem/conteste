@@ -24,7 +24,7 @@ function CheckoutForm({ email }: { email: string }) {
     try {
       const baseUrl = window.location.origin;
       const dossierId = typeof window !== "undefined"
-        ? localStorage.getItem("conteste_dossierId") || ""
+        ? localStorage.getItem("conteste_dossier_id") || ""
         : "";
 
       const result = await stripe.confirmPayment({
@@ -98,8 +98,8 @@ export default function PaywallPage() {
     setError(null);
 
     try {
-      const dossierId = localStorage.getItem("conteste_dossierId") || "dev_" + Date.now();
-      localStorage.setItem("conteste_dossierId", dossierId);
+      const dossierId = localStorage.getItem("conteste_dossier_id") || "dev_" + Date.now();
+      localStorage.setItem("conteste_dossier_id", dossierId);
       localStorage.setItem("conteste_email", email);
 
       const res = await fetch("/api/payment", {
@@ -129,8 +129,8 @@ export default function PaywallPage() {
 
   // Simuler le paiement en dev/demo
   const handleDevPayment = () => {
-    const dossierId = localStorage.getItem("conteste_dossierId") || "demo_" + Date.now();
-    localStorage.setItem("conteste_dossierId", dossierId);
+    const dossierId = localStorage.getItem("conteste_dossier_id") || "demo_" + Date.now();
+    localStorage.setItem("conteste_dossier_id", dossierId);
     localStorage.setItem("conteste_paid", "true");
     if (email) {
       localStorage.setItem("conteste_email", email);

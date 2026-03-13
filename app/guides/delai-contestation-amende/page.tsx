@@ -2,13 +2,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "D\u00e9lai de contestation d'amende en France — Guide 2026 | Conteste.app",
+  title: "Délai de contestation d'amende en France — Guide 2026 | Conteste.app",
   description:
-    "Quel d\u00e9lai pour contester une amende en France ? 45 jours pour un PV classique, 30 jours pour un FPS. D\u00e9lai major\u00e9, exceptions et conseils pratiques.",
+    "Quel délai pour contester une amende en France ? 45 jours pour un PV classique, 30 jours pour un FPS. Délai majoré, exceptions et conseils pratiques.",
   openGraph: {
-    title: "D\u00e9lai de contestation d'amende — Guide 2026 | Conteste.app",
+    title: "Délai de contestation d'amende — Guide 2026 | Conteste.app",
     description:
-      "45 jours pour un PV classique, 30 jours pour un FPS. Tout savoir sur les d\u00e9lais de contestation.",
+      "45 jours pour un PV classique, 30 jours pour un FPS. Tout savoir sur les délais de contestation.",
     url: "https://conteste.app/guides/delai-contestation-amende",
     siteName: "Conteste.app",
     locale: "fr_FR",
@@ -21,29 +21,29 @@ export const metadata: Metadata = {
 
 const faq = [
   {
-    question: "Quel est le d\u00e9lai pour contester une amende ?",
+    question: "Quel est le délai pour contester une amende ?",
     answer:
-      "Le d\u00e9lai l\u00e9gal est de 45 jours \u00e0 compter de la date d'envoi de l'avis de contravention pour les amendes forfaitaires classiques (radar, feu rouge, ceinture, t\u00e9l\u00e9phone). Pour un forfait post-stationnement (FPS), le d\u00e9lai est de 30 jours pour le RAPO.",
+      "Le délai légal est de 45 jours à compter de la date d'envoi de l'avis de contravention pour les amendes forfaitaires classiques (radar, feu rouge, ceinture, téléphone). Pour un forfait post-stationnement (FPS), le délai est de 30 jours pour le RAPO.",
   },
   {
-    question: "Le d\u00e9lai court-il \u00e0 partir de la r\u00e9ception du courrier ?",
+    question: "Le délai court-il à partir de la réception du courrier ?",
     answer:
-      "Non, le d\u00e9lai court \u00e0 partir de la date d'envoi de l'avis de contravention, et non de sa r\u00e9ception. Cette date figure sur l'avis. En pratique, vous disposez donc de quelques jours de moins que les 45 jours th\u00e9oriques.",
+      "Non, le délai court à partir de la date d'envoi de l'avis de contravention, et non de sa réception. Cette date figure sur l'avis. En pratique, vous disposez donc de quelques jours de moins que les 45 jours théoriques.",
   },
   {
-    question: "Peut-on contester une amende major\u00e9e ?",
+    question: "Peut-on contester une amende majorée ?",
     answer:
-      "Oui, mais la contestation d'une amende major\u00e9e est plus complexe. Vous devez d'abord consigner le montant major\u00e9 avant de pouvoir contester. Le d\u00e9lai de contestation est de 30 jours \u00e0 compter de l'envoi de l'avis de majoration.",
+      "Oui, mais la contestation d'une amende majorée est plus complexe. Vous devez d'abord consigner le montant majoré avant de pouvoir contester. Le délai de contestation est de 30 jours à compter de l'envoi de l'avis de majoration.",
   },
   {
-    question: "Que se passe-t-il si le d\u00e9lai est d\u00e9pass\u00e9 ?",
+    question: "Que se passe-t-il si le délai est dépassé ?",
     answer:
-      "Si le d\u00e9lai de 45 jours est d\u00e9pass\u00e9, l'amende est automatiquement major\u00e9e. Vous pouvez encore contester l'amende major\u00e9e dans un d\u00e9lai de 30 jours, mais vous devrez consigner le montant major\u00e9.",
+      "Si le délai de 45 jours est dépassé, l'amende est automatiquement majorée. Vous pouvez encore contester l'amende majorée dans un délai de 30 jours, mais vous devrez consigner le montant majoré.",
   },
   {
-    question: "Le d\u00e9lai est-il le m\u00eame dans tous les d\u00e9partements ?",
+    question: "Le délai est-il le même dans tous les départements ?",
     answer:
-      "Oui, les d\u00e9lais de contestation sont fix\u00e9s par la loi et sont identiques sur tout le territoire fran\u00e7ais m\u00e9tropolitain et en outre-mer.",
+      "Oui, les délais de contestation sont fixés par la loi et sont identiques sur tout le territoire français métropolitain et en outre-mer.",
   },
 ];
 
@@ -52,12 +52,12 @@ export default function DelaiContestationPage() {
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      headline: "D\u00e9lai de contestation d'amende en France — Guide complet 2026",
+      headline: "Délai de contestation d'amende en France — Guide complet 2026",
       description:
-        "Tous les d\u00e9lais de contestation d'amende en France : 45 jours pour un PV classique, 30 jours pour un FPS.",
+        "Tous les délais de contestation d'amende en France : 45 jours pour un PV classique, 30 jours pour un FPS.",
       url: "https://conteste.app/guides/delai-contestation-amende",
-      datePublished: "2026-03-01",
-      dateModified: "2026-03-12",
+      datePublished: "2026-02-05",
+      dateModified: new Date().toISOString().split("T")[0],
       author: { "@type": "Organization", name: "Conteste.app" },
       publisher: {
         "@type": "Organization",
@@ -80,7 +80,7 @@ export default function DelaiContestationPage() {
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Accueil", item: "https://conteste.app" },
         { "@type": "ListItem", position: 2, name: "Guides", item: "https://conteste.app/guides" },
-        { "@type": "ListItem", position: 3, name: "D\u00e9lai de contestation", item: "https://conteste.app/guides/delai-contestation-amende" },
+        { "@type": "ListItem", position: 3, name: "Délai de contestation", item: "https://conteste.app/guides/delai-contestation-amende" },
       ],
     },
   ];
@@ -97,31 +97,31 @@ export default function DelaiContestationPage() {
           <span className="mx-2">&gt;</span>
           <Link href="/guides" className="hover:text-bleu-france">Guides</Link>
           <span className="mx-2">&gt;</span>
-          <span className="text-gris-titre font-medium">D\u00e9lai de contestation d&apos;amende</span>
+          <span className="text-gris-titre font-medium">Délai de contestation d&apos;amende</span>
         </nav>
 
         <h1 className="text-h1-mobile md:text-h1-desktop text-gris-titre mb-4">
-          D\u00e9lai de contestation d&apos;amende en France : guide complet 2026
+          Délai de contestation d&apos;amende en France : guide complet 2026
         </h1>
 
         <div className="bg-bleu-fond rounded-card p-6 mb-8">
           <p className="text-body text-gris-texte">
-            Le respect du d\u00e9lai de contestation est la premi\u00e8re condition pour que votre
-            requ\u00eate soit recevable. <strong>45 jours pour une amende classique,
+            Le respect du délai de contestation est la première condition pour que votre
+            requête soit recevable. <strong>45 jours pour une amende classique,
             30 jours pour un FPS.</strong> Voici tout ce que vous devez savoir.
           </p>
         </div>
 
-        {/* Tableau r\u00e9capitulatif */}
+        {/* Tableau récapitulatif */}
         <section className="mb-8">
-          <h2 className="text-h2 text-gris-titre mb-4">R\u00e9capitulatif des d\u00e9lais</h2>
+          <h2 className="text-h2 text-gris-titre mb-4">Récapitulatif des délais</h2>
           <div className="overflow-x-auto">
             <table className="w-full bg-white border border-gris-bordure rounded-card text-body">
               <thead>
                 <tr className="bg-gris-fond">
                   <th className="text-left p-4 text-gris-titre font-bold border-b border-gris-bordure">Type d&apos;amende</th>
-                  <th className="text-left p-4 text-gris-titre font-bold border-b border-gris-bordure">D\u00e9lai</th>
-                  <th className="text-left p-4 text-gris-titre font-bold border-b border-gris-bordure">Point de d\u00e9part</th>
+                  <th className="text-left p-4 text-gris-titre font-bold border-b border-gris-bordure">Délai</th>
+                  <th className="text-left p-4 text-gris-titre font-bold border-b border-gris-bordure">Point de départ</th>
                   <th className="text-left p-4 text-gris-titre font-bold border-b border-gris-bordure">Portail</th>
                 </tr>
               </thead>
@@ -145,7 +145,7 @@ export default function DelaiContestationPage() {
                   <td className="p-4">ANTAI</td>
                 </tr>
                 <tr className="border-b border-gris-bordure">
-                  <td className="p-4">Amende t\u00e9l\u00e9phone</td>
+                  <td className="p-4">Amende téléphone</td>
                   <td className="p-4 font-bold">45 jours</td>
                   <td className="p-4">Date d&apos;envoi de l&apos;avis</td>
                   <td className="p-4">ANTAI</td>
@@ -157,7 +157,7 @@ export default function DelaiContestationPage() {
                   <td className="p-4">Commune</td>
                 </tr>
                 <tr>
-                  <td className="p-4">Amende major\u00e9e</td>
+                  <td className="p-4">Amende majorée</td>
                   <td className="p-4 font-bold">30 jours</td>
                   <td className="p-4">Date d&apos;envoi de la majoration</td>
                   <td className="p-4">ANTAI</td>
@@ -167,47 +167,47 @@ export default function DelaiContestationPage() {
           </div>
         </section>
 
-        {/* D\u00e9tail 45 jours */}
+        {/* Détail 45 jours */}
         <section className="mb-8">
-          <h2 className="text-h2 text-gris-titre mb-4">Le d\u00e9lai de 45 jours expliqu\u00e9</h2>
+          <h2 className="text-h2 text-gris-titre mb-4">Le délai de 45 jours expliqué</h2>
           <div className="space-y-3 text-body text-gris-texte">
             <p>
-              Pour les amendes forfaitaires classiques (exc\u00e8s de vitesse, feu rouge,
-              ceinture, t\u00e9l\u00e9phone au volant), le d\u00e9lai de contestation est de
-              <strong> 45 jours</strong> \u00e0 compter de la date d&apos;envoi de l&apos;avis de
+              Pour les amendes forfaitaires classiques (excès de vitesse, feu rouge,
+              ceinture, téléphone au volant), le délai de contestation est de
+              <strong> 45 jours</strong> à compter de la date d&apos;envoi de l&apos;avis de
               contravention.
             </p>
             <p>
-              <strong>Attention :</strong> la date de d\u00e9part est la date d&apos;envoi
-              figurant sur l&apos;avis, pas la date \u00e0 laquelle vous le recevez dans votre
-              bo\u00eete aux lettres. Comptez 2 \u00e0 5 jours d&apos;acheminement postal,
-              ce qui r\u00e9duit d&apos;autant votre d\u00e9lai effectif.
+              <strong>Attention :</strong> la date de départ est la date d&apos;envoi
+              figurant sur l&apos;avis, pas la date à laquelle vous le recevez dans votre
+              boîte aux lettres. Comptez 2 à 5 jours d&apos;acheminement postal,
+              ce qui réduit d&apos;autant votre délai effectif.
             </p>
             <p>
-              Si vous contestez par voie \u00e9lectronique sur ANTAI, c&apos;est la date de soumission
-              en ligne qui fait foi. Par courrier recommand\u00e9, c&apos;est la date d&apos;envoi
+              Si vous contestez par voie électronique sur ANTAI, c&apos;est la date de soumission
+              en ligne qui fait foi. Par courrier recommandé, c&apos;est la date d&apos;envoi
               (cachet de la Poste faisant foi).
             </p>
           </div>
         </section>
 
-        {/* Que se passe-t-il apr\u00e8s le d\u00e9lai */}
+        {/* Que se passe-t-il après le délai */}
         <section className="mb-8">
-          <h2 className="text-h2 text-gris-titre mb-4">Que se passe-t-il si le d\u00e9lai est d\u00e9pass\u00e9 ?</h2>
+          <h2 className="text-h2 text-gris-titre mb-4">Que se passe-t-il si le délai est dépassé ?</h2>
           <div className="space-y-3 text-body text-gris-texte">
             <p>
               Si vous ne contestez pas et ne payez pas dans les 45 jours, l&apos;amende est
-              automatiquement <strong>major\u00e9e</strong>. Le montant major\u00e9 est g\u00e9n\u00e9ralement
-              de 375&nbsp;&euro; pour une amende de 4\u00e8me classe (radar, feu rouge, ceinture, t\u00e9l\u00e9phone).
+              automatiquement <strong>majorée</strong>. Le montant majoré est généralement
+              de 375&nbsp;&euro; pour une amende de 4ème classe (radar, feu rouge, ceinture, téléphone).
             </p>
             <p>
-              Vous pouvez encore contester l&apos;amende major\u00e9e, mais les conditions sont plus
-              strictes : d\u00e9lai de 30 jours et obligation de <strong>consigner</strong> le
-              montant major\u00e9 avant de contester.
+              Vous pouvez encore contester l&apos;amende majorée, mais les conditions sont plus
+              strictes : délai de 30 jours et obligation de <strong>consigner</strong> le
+              montant majoré avant de contester.
             </p>
             <p>
               <strong>La consignation n&apos;est pas un paiement.</strong> Si votre contestation
-              aboutit, le montant consign\u00e9 vous est rembours\u00e9.
+              aboutit, le montant consigné vous est remboursé.
             </p>
           </div>
         </section>
@@ -218,7 +218,7 @@ export default function DelaiContestationPage() {
           <ul className="space-y-2 text-body text-gris-texte">
             <li className="flex gap-2">
               <span className="text-bleu-france font-bold flex-shrink-0">&bull;</span>
-              <span>Contestez le plus t\u00f4t possible &mdash; ne laissez pas le d\u00e9lai s&apos;\u00e9couler</span>
+              <span>Contestez le plus tôt possible &mdash; ne laissez pas le délai s&apos;écouler</span>
             </li>
             <li className="flex gap-2">
               <span className="text-bleu-france font-bold flex-shrink-0">&bull;</span>
@@ -226,7 +226,7 @@ export default function DelaiContestationPage() {
             </li>
             <li className="flex gap-2">
               <span className="text-bleu-france font-bold flex-shrink-0">&bull;</span>
-              <span>Privil\u00e9giez la contestation en ligne sur ANTAI : plus rapide et tra\u00e7able</span>
+              <span>Privilégiez la contestation en ligne sur ANTAI : plus rapide et traçable</span>
             </li>
             <li className="flex gap-2">
               <span className="text-bleu-france font-bold flex-shrink-0">&bull;</span>
@@ -237,7 +237,7 @@ export default function DelaiContestationPage() {
 
         {/* FAQ */}
         <section className="mb-8">
-          <h2 className="text-h2 text-gris-titre mb-4">Questions fr\u00e9quentes</h2>
+          <h2 className="text-h2 text-gris-titre mb-4">Questions fréquentes</h2>
           <div className="space-y-4">
             {faq.map((item, i) => (
               <details key={i} className="bg-white border border-gris-bordure rounded-card group">
@@ -256,7 +256,7 @@ export default function DelaiContestationPage() {
         {/* CTA */}
         <div className="bg-bleu-fond rounded-card p-8 text-center">
           <h2 className="text-h2 text-gris-titre mb-3">
-            Votre d\u00e9lai court encore ?
+            Votre délai court encore ?
           </h2>
           <p className="text-body text-gris-texte mb-6">
             Analysez gratuitement vos chances de contestation en moins de 60 secondes.

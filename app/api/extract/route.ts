@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import type { AmendeExtracted } from "@/lib/types";
 import { calculerDateLimite } from "@/lib/utils";
+import { createDossier } from "@/lib/dossier-store";
+import { trackEvent, getClientIdFromCookie } from "@/lib/analytics";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
@@ -86,9 +88,19 @@ export async function POST(request: NextRequest) {
       console.warn(
         "[extract] ANTHROPIC_API_KEY manquante — retour de donnees mock"
       );
+      const mockData = getMockData();
+      let dossierId: string | undefined;
+      try {
+        dossierId = await createDossier(mockData);
+      } catch (err) {
+        console.error("[extract] Erreur creation dossier (mock):", err);
+      }
+      const clientId = getClientIdFromCookie(request.headers.get("cookie"));
+      trackEvent("extraction_complete", { amende_type: mockData.type, departement: mockData.codePostal?.slice(0, 2) || "" }, clientId);
       return NextResponse.json({
         success: true,
-        data: getMockData(),
+        data: mockData,
+        dossierId,
       });
     }
 
@@ -201,9 +213,21 @@ export async function POST(request: NextRequest) {
       ville: parsed.ville || "",
     };
 
+    // Create dossier in DB
+    let dossierId: string | undefined;
+    try {
+      dossierId = await createDossier(extracted);
+    } catch (err) {
+      console.error("[extract] Erreur creation dossier:", err);
+    }
+
+    const clientId = getClientIdFromCookie(request.headers.get("cookie"));
+    trackEvent("extraction_complete", { amende_type: extracted.type, departement: extracted.codePostal?.slice(0, 2) || "" }, clientId);
+
     return NextResponse.json({
       success: true,
       data: extracted,
+      dossierId,
     });
   } catch (error) {
     console.error("Extraction error:", error);

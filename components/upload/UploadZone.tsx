@@ -60,6 +60,7 @@ export function UploadZone() {
   const handleDemoClick = useCallback(() => {
     localStorage.setItem("conteste_dossier", JSON.stringify(MOCK_AMENDE));
     localStorage.setItem("conteste_amende", JSON.stringify(MOCK_AMENDE));
+    localStorage.setItem("conteste_dossier_id", "demo_" + Date.now());
     router.push("/contest/confirm");
   }, [router]);
 
@@ -170,6 +171,11 @@ export function UploadZone() {
         "conteste_dossier",
         JSON.stringify(result.data)
       );
+
+      // Stocker le dossierId retourné par l'API
+      if (result.dossierId) {
+        localStorage.setItem("conteste_dossier_id", result.dossierId);
+      }
 
       // Petite pause pour montrer la barre a 100%
       setTimeout(() => {

@@ -7,7 +7,8 @@
     "montantForfaitaire": 135,
     "pointsRetrait": 1,
     "motifsPrincipaux": ["panneau-masque", "erreur-plaque", "vehicule-vendu", "marge-technique"],
-    "description": "Exc\u00e8s de vitesse d\u00e9tect\u00e9 par radar automatique"
+    "description": "Excès de vitesse détecté par radar automatique",
+    "datePublished": "2026-01-15"
   },
   {
     "slug": "stationnement-fps",
@@ -17,7 +18,8 @@
     "montantForfaitaire": 35,
     "pointsRetrait": 0,
     "motifsPrincipaux": ["horodateur-defaillant", "marquage-absent", "signalisation-manquante"],
-    "description": "Forfait post-stationnement"
+    "description": "Forfait post-stationnement",
+    "datePublished": "2026-01-22"
   },
   {
     "slug": "feux-rouges",
@@ -27,26 +29,29 @@
     "montantForfaitaire": 135,
     "pointsRetrait": 4,
     "motifsPrincipaux": ["signalisation-ambigue", "erreur-plaque", "feu-defaillant"],
-    "description": "Franchissement de feu rouge"
+    "description": "Franchissement de feu rouge",
+    "datePublished": "2026-02-03"
   },
   {
     "slug": "ceinture",
-    "label": "Amende ceinture de s\u00e9curit\u00e9",
+    "label": "Amende ceinture de sécurité",
     "portail": "antai",
     "delaiJours": 45,
     "montantForfaitaire": 135,
     "pointsRetrait": 3,
     "motifsPrincipaux": ["erreur-identification", "exemption-medicale"],
-    "description": "Non-port de la ceinture de s\u00e9curit\u00e9"
+    "description": "Non-port de la ceinture de sécurité",
+    "datePublished": "2026-02-10"
   },
   {
     "slug": "telephone",
-    "label": "Amende t\u00e9l\u00e9phone au volant",
+    "label": "Amende téléphone au volant",
     "portail": "antai",
     "delaiJours": 45,
     "montantForfaitaire": 135,
     "pointsRetrait": 3,
     "motifsPrincipaux": ["erreur-identification", "kit-mains-libres"],
-    "description": "Usage du t\u00e9l\u00e9phone au volant"
+    "description": "Usage du téléphone au volant",
+    "datePublished": "2026-02-18"
   }
 ]

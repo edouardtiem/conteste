@@ -4,11 +4,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "ANTAI : comment contester une amende en ligne — Guide 2026 | Conteste.app",
   description:
-    "Comment contester une amende sur le site ANTAI (antai.gouv.fr) ? Guide \u00e9tape par \u00e9tape : num\u00e9ro d'avis, motif, pi\u00e8ces justificatives, suivi de dossier. Tout savoir sur la proc\u00e9dure en ligne.",
+    "Comment contester une amende sur le site ANTAI (antai.gouv.fr) ? Guide étape par étape : numéro d'avis, motif, pièces justificatives, suivi de dossier. Tout savoir sur la procédure en ligne.",
   openGraph: {
     title: "ANTAI : comment contester une amende en ligne | Conteste.app",
     description:
-      "Guide \u00e9tape par \u00e9tape pour contester une amende sur ANTAI. Proc\u00e9dure compl\u00e8te.",
+      "Guide étape par étape pour contester une amende sur ANTAI. Procédure complète.",
     url: "https://conteste.app/guides/antai-comment-contester",
     siteName: "Conteste.app",
     locale: "fr_FR",
@@ -23,32 +23,32 @@ const faq = [
   {
     question: "Qu'est-ce que l'ANTAI ?",
     answer:
-      "L'ANTAI (Agence Nationale de Traitement Automatis\u00e9 des Infractions) est l'organisme public fran\u00e7ais charg\u00e9 de traiter les infractions routi\u00e8res automatis\u00e9es. C'est sur leur site (antai.gouv.fr) que vous pouvez contester vos amendes en ligne.",
+      "L'ANTAI (Agence Nationale de Traitement Automatisé des Infractions) est l'organisme public français chargé de traiter les infractions routières automatisées. C'est sur leur site (antai.gouv.fr) que vous pouvez contester vos amendes en ligne.",
   },
   {
     question: "Quelles amendes peut-on contester sur ANTAI ?",
     answer:
-      "Les amendes contestables sur ANTAI sont : exc\u00e8s de vitesse (radar), feu rouge, ceinture de s\u00e9curit\u00e9, t\u00e9l\u00e9phone au volant, et de mani\u00e8re g\u00e9n\u00e9rale toutes les contraventions \u00e9mises par le syst\u00e8me de contr\u00f4le automatis\u00e9. Les FPS (stationnement) se contestent sur le portail de la commune.",
+      "Les amendes contestables sur ANTAI sont : excès de vitesse (radar), feu rouge, ceinture de sécurité, téléphone au volant, et de manière générale toutes les contraventions émises par le système de contrôle automatisé. Les FPS (stationnement) se contestent sur le portail de la commune.",
   },
   {
     question: "Faut-il un compte pour contester sur ANTAI ?",
     answer:
-      "Non, il n'est pas n\u00e9cessaire de cr\u00e9er un compte. Vous avez simplement besoin du num\u00e9ro de l'avis de contravention et de votre nom pour acc\u00e9der au formulaire de contestation.",
+      "Non, il n'est pas nécessaire de créer un compte. Vous avez simplement besoin du numéro de l'avis de contravention et de votre nom pour accéder au formulaire de contestation.",
   },
   {
-    question: "Peut-on suivre l'\u00e9tat de sa contestation sur ANTAI ?",
+    question: "Peut-on suivre l'état de sa contestation sur ANTAI ?",
     answer:
-      "Oui, le site de l'ANTAI permet de suivre l'\u00e9tat d'avancement de votre contestation. Rendez-vous sur antai.gouv.fr et cliquez sur \"Suivre mon dossier\". Vous aurez besoin de votre num\u00e9ro d'avis.",
+      "Oui, le site de l'ANTAI permet de suivre l'état d'avancement de votre contestation. Rendez-vous sur antai.gouv.fr et cliquez sur \"Suivre mon dossier\". Vous aurez besoin de votre numéro d'avis.",
   },
   {
     question: "Combien de temps dure le traitement d'une contestation sur ANTAI ?",
     answer:
-      "Le d\u00e9lai moyen de traitement est d'environ 45 jours. Cependant, ce d\u00e9lai peut varier selon la complexit\u00e9 du dossier et la charge du tribunal comp\u00e9tent. Vous recevrez la d\u00e9cision par courrier.",
+      "Le délai moyen de traitement est d'environ 45 jours. Cependant, ce délai peut varier selon la complexité du dossier et la charge du tribunal compétent. Vous recevrez la décision par courrier.",
   },
   {
     question: "Que faire si le site ANTAI ne fonctionne pas ?",
     answer:
-      "Si le site est temporairement inaccessible, vous pouvez contester par courrier recommand\u00e9 avec accus\u00e9 de r\u00e9ception adress\u00e9 \u00e0 l'Officier du Minist\u00e8re Public du tribunal comp\u00e9tent. Conservez la preuve d'envoi.",
+      "Si le site est temporairement inaccessible, vous pouvez contester par courrier recommandé avec accusé de réception adressé à l'Officier du Ministère Public du tribunal compétent. Conservez la preuve d'envoi.",
   },
 ];
 
@@ -59,10 +59,10 @@ export default function AntaiCommentContesterPage() {
       "@type": "Article",
       headline: "ANTAI : comment contester une amende en ligne",
       description:
-        "Guide complet pour contester une amende sur le site ANTAI. Proc\u00e9dure \u00e9tape par \u00e9tape.",
+        "Guide complet pour contester une amende sur le site ANTAI. Procédure étape par étape.",
       url: "https://conteste.app/guides/antai-comment-contester",
-      datePublished: "2026-03-01",
-      dateModified: "2026-03-12",
+      datePublished: "2026-02-20",
+      dateModified: new Date().toISOString().split("T")[0],
       author: { "@type": "Organization", name: "Conteste.app" },
       publisher: {
         "@type": "Organization",
@@ -84,13 +84,13 @@ export default function AntaiCommentContesterPage() {
       "@type": "HowTo",
       name: "Comment contester une amende sur ANTAI",
       step: [
-        { "@type": "HowToStep", position: 1, name: "Acc\u00e9der au site ANTAI", text: "Rendez-vous sur www.antai.gouv.fr" },
-        { "@type": "HowToStep", position: 2, name: "Cliquer sur D\u00e9signer / Contester", text: "Choisissez l'option de contestation" },
-        { "@type": "HowToStep", position: 3, name: "Saisir le num\u00e9ro d'avis", text: "Entrez votre num\u00e9ro d'avis de contravention" },
-        { "@type": "HowToStep", position: 4, name: "Choisir le motif", text: "S\u00e9lectionnez votre motif de contestation" },
-        { "@type": "HowToStep", position: 5, name: "R\u00e9diger l'argumentaire", text: "R\u00e9digez votre motivation de contestation" },
-        { "@type": "HowToStep", position: 6, name: "Joindre les pi\u00e8ces", text: "T\u00e9l\u00e9chargez vos justificatifs" },
-        { "@type": "HowToStep", position: 7, name: "Valider et conserver le r\u00e9c\u00e9piss\u00e9", text: "Confirmez et conservez votre accus\u00e9 de r\u00e9ception" },
+        { "@type": "HowToStep", position: 1, name: "Accéder au site ANTAI", text: "Rendez-vous sur www.antai.gouv.fr" },
+        { "@type": "HowToStep", position: 2, name: "Cliquer sur Désigner / Contester", text: "Choisissez l'option de contestation" },
+        { "@type": "HowToStep", position: 3, name: "Saisir le numéro d'avis", text: "Entrez votre numéro d'avis de contravention" },
+        { "@type": "HowToStep", position: 4, name: "Choisir le motif", text: "Sélectionnez votre motif de contestation" },
+        { "@type": "HowToStep", position: 5, name: "Rédiger l'argumentaire", text: "Rédigez votre motivation de contestation" },
+        { "@type": "HowToStep", position: 6, name: "Joindre les pièces", text: "Téléchargez vos justificatifs" },
+        { "@type": "HowToStep", position: 7, name: "Valider et conserver le récépissé", text: "Confirmez et conservez votre accusé de réception" },
       ],
     },
     {
@@ -125,9 +125,9 @@ export default function AntaiCommentContesterPage() {
 
         <div className="bg-bleu-fond rounded-card p-6 mb-8">
           <p className="text-body text-gris-texte">
-            L&apos;ANTAI (Agence Nationale de Traitement Automatis\u00e9 des Infractions) est le portail
-            officiel pour contester les amendes routi\u00e8res en France. Voici comment l&apos;utiliser,
-            \u00e9tape par \u00e9tape.
+            L&apos;ANTAI (Agence Nationale de Traitement Automatisé des Infractions) est le portail
+            officiel pour contester les amendes routières en France. Voici comment l&apos;utiliser,
+            étape par étape.
           </p>
         </div>
 
@@ -136,8 +136,8 @@ export default function AntaiCommentContesterPage() {
           <h2 className="text-h2 text-gris-titre mb-4">Qu&apos;est-ce que l&apos;ANTAI ?</h2>
           <div className="space-y-3 text-body text-gris-texte">
             <p>
-              L&apos;ANTAI est l&apos;agence gouvernementale cr\u00e9\u00e9e en 2011, charg\u00e9e du traitement
-              des infractions routi\u00e8res d\u00e9tect\u00e9es par le syst\u00e8me de contr\u00f4le automatis\u00e9
+              L&apos;ANTAI est l&apos;agence gouvernementale créée en 2011, chargée du traitement
+              des infractions routières détectées par le système de contrôle automatisé
               (radars, feux rouges, etc.).
             </p>
             <p>
@@ -145,9 +145,9 @@ export default function AntaiCommentContesterPage() {
             </p>
             <ul className="space-y-1 ml-4">
               <li>Payer ses amendes en ligne</li>
-              <li>D\u00e9signer un autre conducteur</li>
-              <li><strong>Contester une amende</strong> (requ\u00eate en exon\u00e9ration)</li>
-              <li>Suivre l&apos;\u00e9tat d&apos;un dossier</li>
+              <li>Désigner un autre conducteur</li>
+              <li><strong>Contester une amende</strong> (requête en exonération)</li>
+              <li>Suivre l&apos;état d&apos;un dossier</li>
             </ul>
           </div>
         </section>
@@ -157,10 +157,10 @@ export default function AntaiCommentContesterPage() {
           <h2 className="text-h2 text-gris-titre mb-4">Quelles amendes peut-on contester sur ANTAI ?</h2>
           <div className="grid md:grid-cols-2 gap-3">
             {[
-              { label: "Exc\u00e8s de vitesse (radar)", ok: true },
+              { label: "Excès de vitesse (radar)", ok: true },
               { label: "Franchissement de feu rouge", ok: true },
               { label: "Non-port de la ceinture", ok: true },
-              { label: "T\u00e9l\u00e9phone au volant", ok: true },
+              { label: "Téléphone au volant", ok: true },
               { label: "Stationnement (FPS)", ok: false },
               { label: "Transports en commun", ok: false },
             ].map((item) => (
@@ -177,7 +177,7 @@ export default function AntaiCommentContesterPage() {
                 </p>
                 {!item.ok && (
                   <p className="text-[13px] text-gris-mention mt-1">
-                    Contestation via le portail de la commune ou de l&apos;op\u00e9rateur
+                    Contestation via le portail de la commune ou de l&apos;opérateur
                   </p>
                 )}
               </div>
@@ -185,52 +185,52 @@ export default function AntaiCommentContesterPage() {
           </div>
         </section>
 
-        {/* Guide \u00e9tape par \u00e9tape */}
+        {/* Guide étape par étape */}
         <section className="mb-8">
           <h2 className="text-h2 text-gris-titre mb-4">
-            Proc\u00e9dure de contestation sur ANTAI : \u00e9tape par \u00e9tape
+            Procédure de contestation sur ANTAI : étape par étape
           </h2>
           <div className="space-y-6">
             {[
               {
                 n: 1,
                 title: "Rendez-vous sur antai.gouv.fr",
-                text: "Ouvrez votre navigateur et acc\u00e9dez au site officiel de l'ANTAI. Assurez-vous d'\u00eatre bien sur le site officiel (domaine en .gouv.fr).",
+                text: "Ouvrez votre navigateur et accédez au site officiel de l'ANTAI. Assurez-vous d'être bien sur le site officiel (domaine en .gouv.fr).",
               },
               {
                 n: 2,
-                title: "Cliquez sur \"D\u00e9signer ou Contester\"",
-                text: "Sur la page d'accueil, cliquez sur le bouton \"D\u00e9signer ou Contester\". Vous serez redirig\u00e9 vers le formulaire.",
+                title: "Cliquez sur \"Désigner ou Contester\"",
+                text: "Sur la page d'accueil, cliquez sur le bouton \"Désigner ou Contester\". Vous serez redirigé vers le formulaire.",
               },
               {
                 n: 3,
-                title: "Saisissez votre num\u00e9ro d'avis de contravention",
-                text: "Le num\u00e9ro d'avis figure en haut \u00e0 droite de votre amende. Il s'agit d'un num\u00e9ro unique qui identifie votre dossier. Saisissez-le sans espaces.",
+                title: "Saisissez votre numéro d'avis de contravention",
+                text: "Le numéro d'avis figure en haut à droite de votre amende. Il s'agit d'un numéro unique qui identifie votre dossier. Saisissez-le sans espaces.",
               },
               {
                 n: 4,
-                title: "S\u00e9lectionnez \"Contester\" (requ\u00eate en exon\u00e9ration)",
-                text: "Vous aurez le choix entre d\u00e9signer un autre conducteur ou contester. Choisissez \"Contester\" pour formuler une requ\u00eate en exon\u00e9ration.",
+                title: "Sélectionnez \"Contester\" (requête en exonération)",
+                text: "Vous aurez le choix entre désigner un autre conducteur ou contester. Choisissez \"Contester\" pour formuler une requête en exonération.",
               },
               {
                 n: 5,
                 title: "Choisissez votre motif de contestation",
-                text: "L'ANTAI propose plusieurs motifs pr\u00e9d\u00e9finis. S\u00e9lectionnez celui qui correspond le mieux \u00e0 votre situation : v\u00e9hicule vol\u00e9 ou vendu, autre conducteur, contestation de l'infraction elle-m\u00eame.",
+                text: "L'ANTAI propose plusieurs motifs prédéfinis. Sélectionnez celui qui correspond le mieux à votre situation : véhicule volé ou vendu, autre conducteur, contestation de l'infraction elle-même.",
               },
               {
                 n: 6,
-                title: "R\u00e9digez votre argumentaire",
-                text: "Dans le champ \"Motif de la requ\u00eate\", exposez clairement et factuellement les raisons de votre contestation. Soyez pr\u00e9cis, mentionnez les articles de loi si possible, et \u00e9vitez les formulations \u00e9motionnelles.",
+                title: "Rédigez votre argumentaire",
+                text: "Dans le champ \"Motif de la requête\", exposez clairement et factuellement les raisons de votre contestation. Soyez précis, mentionnez les articles de loi si possible, et évitez les formulations émotionnelles.",
               },
               {
                 n: 7,
-                title: "Joignez vos pi\u00e8ces justificatives",
-                text: "T\u00e9l\u00e9chargez les documents qui appuient votre contestation : photos, copie de carte grise, certificat de cession, attestation m\u00e9dicale, etc. Les formats accept\u00e9s sont g\u00e9n\u00e9ralement PDF, JPG et PNG.",
+                title: "Joignez vos pièces justificatives",
+                text: "Téléchargez les documents qui appuient votre contestation : photos, copie de carte grise, certificat de cession, attestation médicale, etc. Les formats acceptés sont généralement PDF, JPG et PNG.",
               },
               {
                 n: 8,
-                title: "Validez et conservez votre r\u00e9c\u00e9piss\u00e9",
-                text: "Apr\u00e8s validation, vous recevrez un r\u00e9c\u00e9piss\u00e9 de d\u00e9p\u00f4t. Conservez-le pr\u00e9cieusement : il prouve que vous avez bien contest\u00e9 dans les d\u00e9lais.",
+                title: "Validez et conservez votre récépissé",
+                text: "Après validation, vous recevrez un récépissé de dépôt. Conservez-le précieusement : il prouve que vous avez bien contesté dans les délais.",
               },
             ].map((step) => (
               <div key={step.n} className="flex gap-4">
@@ -246,26 +246,26 @@ export default function AntaiCommentContesterPage() {
           </div>
         </section>
 
-        {/* Conseils r\u00e9daction */}
+        {/* Conseils rédaction */}
         <section className="mb-8">
-          <h2 className="text-h2 text-gris-titre mb-4">Conseils pour r\u00e9diger votre contestation</h2>
+          <h2 className="text-h2 text-gris-titre mb-4">Conseils pour rédiger votre contestation</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-vert-fond border border-vert-succes rounded-card p-4">
               <h3 className="text-h3 text-vert-succes mb-2">A faire</h3>
               <ul className="space-y-1 text-body text-gris-texte">
-                <li>&bull; Rester factuel et pr\u00e9cis</li>
+                <li>&bull; Rester factuel et précis</li>
                 <li>&bull; Citer les articles de loi</li>
-                <li>&bull; Joindre des preuves concr\u00e8tes</li>
-                <li>&bull; D\u00e9crire les faits chronologiquement</li>
+                <li>&bull; Joindre des preuves concrètes</li>
+                <li>&bull; Décrire les faits chronologiquement</li>
               </ul>
             </div>
             <div className="bg-orange-fond border border-orange-warning rounded-card p-4">
-              <h3 className="text-h3 text-orange-warning mb-2">A \u00e9viter</h3>
+              <h3 className="text-h3 text-orange-warning mb-2">A éviter</h3>
               <ul className="space-y-1 text-body text-gris-texte">
-                <li>&bull; Les arguments \u00e9motionnels</li>
+                <li>&bull; Les arguments émotionnels</li>
                 <li>&bull; Les excuses sans preuve</li>
                 <li>&bull; Les menaces ou le ton agressif</li>
-                <li>&bull; Les copier-coller g\u00e9n\u00e9riques</li>
+                <li>&bull; Les copier-coller génériques</li>
               </ul>
             </div>
           </div>
@@ -276,23 +276,23 @@ export default function AntaiCommentContesterPage() {
           <h2 className="text-h2 text-gris-titre mb-4">Suivre sa contestation</h2>
           <div className="space-y-3 text-body text-gris-texte">
             <p>
-              Apr\u00e8s avoir d\u00e9pos\u00e9 votre contestation, vous pouvez suivre son \u00e9tat sur le site
+              Après avoir déposé votre contestation, vous pouvez suivre son état sur le site
               de l&apos;ANTAI. Rendez-vous sur <strong>antai.gouv.fr</strong> et cliquez sur
               &laquo; Suivre mon dossier &raquo;.
             </p>
             <p>
-              Le d\u00e9lai de traitement moyen est d&apos;environ <strong>45 jours</strong>,
-              mais peut \u00eatre plus long en p\u00e9riode d&apos;affluence. La d\u00e9cision vous sera
-              notifi\u00e9e par courrier de l&apos;Officier du Minist\u00e8re Public.
+              Le délai de traitement moyen est d&apos;environ <strong>45 jours</strong>,
+              mais peut être plus long en période d&apos;affluence. La décision vous sera
+              notifiée par courrier de l&apos;Officier du Ministère Public.
             </p>
             <p>
-              Les trois issues possibles sont : classement sans suite (contestation accept\u00e9e),
+              Les trois issues possibles sont : classement sans suite (contestation acceptée),
               renvoi devant le tribunal de police, ou rejet de la contestation.
             </p>
           </div>
         </section>
 
-        {/* R\u00e9f\u00e9rences */}
+        {/* Références */}
         <section className="mb-8">
           <h2 className="text-h2 text-gris-titre mb-4">Liens utiles</h2>
           <ul className="space-y-2 text-body text-gris-texte">
@@ -308,7 +308,7 @@ export default function AntaiCommentContesterPage() {
             </li>
             <li>
               <a href="https://www.legifrance.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-bleu-france underline">
-                L\u00e9gifrance &mdash; Textes de loi
+                Légifrance &mdash; Textes de loi
               </a>
             </li>
           </ul>
@@ -316,7 +316,7 @@ export default function AntaiCommentContesterPage() {
 
         {/* FAQ */}
         <section className="mb-8">
-          <h2 className="text-h2 text-gris-titre mb-4">Questions fr\u00e9quentes</h2>
+          <h2 className="text-h2 text-gris-titre mb-4">Questions fréquentes</h2>
           <div className="space-y-4">
             {faq.map((item, i) => (
               <details key={i} className="bg-white border border-gris-bordure rounded-card group">
@@ -335,10 +335,10 @@ export default function AntaiCommentContesterPage() {
         {/* CTA */}
         <div className="bg-bleu-fond rounded-card p-8 text-center">
           <h2 className="text-h2 text-gris-titre mb-3">
-            Besoin d&apos;aide pour r\u00e9diger votre contestation ?
+            Besoin d&apos;aide pour rédiger votre contestation ?
           </h2>
           <p className="text-body text-gris-texte mb-6">
-            Notre outil analyse votre amende et g\u00e9n\u00e8re les arguments personnalis\u00e9s
+            Notre outil analyse votre amende et génère les arguments personnalisés
             les plus efficaces pour votre cas. Gratuit pour l&apos;analyse.
           </p>
           <Link

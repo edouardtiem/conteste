@@ -5,11 +5,11 @@ import { getTypes } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Guides de contestation d'amendes en France — Conteste.app",
   description:
-    "Guides complets pour contester vos amendes en France : radar, stationnement FPS, feux rouges, ceinture, t\u00e9l\u00e9phone. D\u00e9lais, motifs recevables, d\u00e9marches par d\u00e9partement.",
+    "Guides complets pour contester vos amendes en France : radar, stationnement FPS, feux rouges, ceinture, téléphone. Délais, motifs recevables, démarches par département.",
   openGraph: {
     title: "Guides de contestation d'amendes en France — Conteste.app",
     description:
-      "Guides complets pour contester vos amendes en France. D\u00e9lais, motifs recevables, d\u00e9marches ANTAI par d\u00e9partement.",
+      "Guides complets pour contester vos amendes en France. Délais, motifs recevables, démarches ANTAI par département.",
     url: "https://conteste.app/guides",
     siteName: "Conteste.app",
     locale: "fr_FR",
@@ -28,7 +28,7 @@ export default function GuidesPage() {
     "@type": "CollectionPage",
     name: "Guides de contestation d'amendes en France",
     description:
-      "Guides complets pour contester vos amendes en France : radar, stationnement FPS, feux rouges, ceinture, t\u00e9l\u00e9phone.",
+      "Guides complets pour contester vos amendes en France : radar, stationnement FPS, feux rouges, ceinture, téléphone.",
     url: "https://conteste.app/guides",
     publisher: {
       "@type": "Organization",
@@ -74,10 +74,28 @@ export default function GuidesPage() {
           Guides de contestation d&apos;amendes en France
         </h1>
         <p className="text-body text-gris-texte mb-8 max-w-[700px]">
-          Retrouvez nos guides d\u00e9taill\u00e9s pour contester chaque type d&apos;amende
-          en France. D\u00e9lais l\u00e9gaux, motifs recevables, d\u00e9marches ANTAI
-          et guides personnalis\u00e9s par d\u00e9partement avec le tribunal comp\u00e9tent.
+          Retrouvez nos guides détaillés pour contester chaque type d&apos;amende
+          en France. Délais légaux, motifs recevables, démarches ANTAI
+          et guides personnalisés par département avec le tribunal compétent.
         </p>
+
+        {/* Pillar guide */}
+        <Link
+          href="/guides/contester-amende-france"
+          className="block bg-bleu-fond border-2 border-bleu-france rounded-card p-6 mb-8 hover:bg-white transition-colors group"
+        >
+          <p className="text-badge text-bleu-france font-bold uppercase tracking-wide mb-2">
+            Guide pilier
+          </p>
+          <h2 className="text-h2 text-gris-titre mb-2 group-hover:text-bleu-france transition-colors">
+            Comment contester une amende en France &mdash; Guide complet 2026
+          </h2>
+          <p className="text-body text-gris-texte">
+            Delais, motifs recevables, procedure ANTAI etape par etape, FAQ : tout
+            ce qu&apos;il faut savoir pour contester efficacement une amende en
+            France.
+          </p>
+        </Link>
 
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           {types.map((type) => (
@@ -99,7 +117,7 @@ export default function GuidesPage() {
                 </span>
                 {type.pointsRetrait > 0 && (
                   <span className="bg-orange-fond text-orange-warning px-3 py-1 rounded-pill font-bold">
-                    {type.pointsRetrait} point{type.pointsRetrait > 1 ? "s" : ""} retir\u00e9{type.pointsRetrait > 1 ? "s" : ""}
+                    {type.pointsRetrait} point{type.pointsRetrait > 1 ? "s" : ""} retiré{type.pointsRetrait > 1 ? "s" : ""}
                   </span>
                 )}
               </div>

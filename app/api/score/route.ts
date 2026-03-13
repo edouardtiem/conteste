@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import type { AmendeExtracted, ScoringResult } from "@/lib/types";
 import { estDelaiDepasse } from "@/lib/utils";
+import { updateScoring } from "@/lib/dossier-store";
+import { trackEvent, getClientIdFromCookie } from "@/lib/analytics";
 
 interface ArgumentPreview {
   titre: string;
@@ -61,8 +63,9 @@ function getMockScoring(): ScoringResultWithArgs {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = await request.json() as { dossierId?: string } & AmendeExtracted;
     const amende = body as AmendeExtracted;
+    const dossierId = body.dossierId;
 
     if (!amende || !amende.type || !amende.montant) {
       return NextResponse.json(
@@ -89,6 +92,8 @@ export async function POST(request: NextRequest) {
           "Le delai de contestation est depasse. Nous ne pouvons pas vous aider sur ce dossier.",
         argumentsPreview: [],
       };
+      const clientId = getClientIdFromCookie(request.headers.get("cookie"));
+      trackEvent("score_calculated", { score_level: "faible", is_blocking: "true" }, clientId);
       return NextResponse.json({ success: true, data: result });
     }
 
@@ -104,6 +109,8 @@ export async function POST(request: NextRequest) {
           "Veuillez verifier les informations de votre amende.",
         argumentsPreview: [],
       };
+      const clientId = getClientIdFromCookie(request.headers.get("cookie"));
+      trackEvent("score_calculated", { score_level: "faible", is_blocking: "true" }, clientId);
       return NextResponse.json({ success: true, data: result });
     }
 
@@ -121,6 +128,8 @@ export async function POST(request: NextRequest) {
           "Consignez d'abord le montant de l'amende majoree avant de contester.",
         argumentsPreview: [],
       };
+      const clientId = getClientIdFromCookie(request.headers.get("cookie"));
+      trackEvent("score_calculated", { score_level: "faible", is_blocking: "true" }, clientId);
       return NextResponse.json({ success: true, data: result });
     }
 
@@ -131,9 +140,15 @@ export async function POST(request: NextRequest) {
       console.warn(
         "[score] ANTHROPIC_API_KEY manquante — retour de donnees mock"
       );
+      const mockScoring = getMockScoring();
+      if (dossierId) {
+        try { await updateScoring(dossierId, mockScoring); } catch (err) { console.error("[score] updateScoring error:", err); }
+      }
+      const clientId = getClientIdFromCookie(request.headers.get("cookie"));
+      trackEvent("score_calculated", { score_level: mockScoring.niveau, is_blocking: "false" }, clientId);
       return NextResponse.json({
         success: true,
-        data: getMockScoring(),
+        data: mockScoring,
       });
     }
 
@@ -190,6 +205,14 @@ RÈGLES ABSOLUES :
           )
         : [],
     };
+
+    // Persist scoring in DB
+    if (dossierId) {
+      try { await updateScoring(dossierId, scoring); } catch (err) { console.error("[score] updateScoring error:", err); }
+    }
+
+    const clientId = getClientIdFromCookie(request.headers.get("cookie"));
+    trackEvent("score_calculated", { score_level: scoring.niveau, is_blocking: "false" }, clientId);
 
     return NextResponse.json({
       success: true,

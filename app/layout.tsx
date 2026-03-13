@@ -65,6 +65,12 @@ function Header() {
             Statistiques
           </Link>
           <Link
+            href="/a-propos"
+            className="hidden min-[500px]:inline-flex items-center min-h-[44px] text-[14px] text-gris-texte hover:text-bleu-france transition-colors"
+          >
+            &Agrave; propos
+          </Link>
+          <Link
             href="/contest/upload"
             className="inline-flex items-center min-h-[44px] bg-bleu-france hover:bg-bleu-france-hover text-white text-[13px] font-bold px-[16px] py-[8px] rounded-button transition-colors"
           >

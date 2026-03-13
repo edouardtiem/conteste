@@ -1,6 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { markAsPaid, isPaid } from "@/lib/payment-store";
+import {
+  markAsPaid as memoryMarkAsPaid,
+  isPaid as memoryIsPaid,
+} from "@/lib/payment-store";
+import {
+  markAsPaid as dbMarkAsPaid,
+  isPaid as dbIsPaid,
+} from "@/lib/dossier-store";
 import type Stripe from "stripe";
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * Webhook Stripe -- recoit les evenements de paiement.
@@ -64,19 +72,31 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ received: true });
       }
 
-      // Idempotence : verifier si deja traite
-      if (isPaid(dossierId)) {
+      // Idempotence : verifier si deja traite (check both stores)
+      const alreadyPaidMemory = memoryIsPaid(dossierId);
+      const alreadyPaidDb = await dbIsPaid(dossierId);
+      if (alreadyPaidMemory || alreadyPaidDb) {
         console.log(
           `[webhook] Dossier ${dossierId} deja marque comme paye — idempotent`
         );
         return NextResponse.json({ received: true });
       }
 
-      // Marquer comme paye
-      markAsPaid(dossierId, email, paymentIntent.id);
+      // Marquer comme paye (both stores for fallback compatibility)
+      memoryMarkAsPaid(dossierId, email, paymentIntent.id);
+      try {
+        await dbMarkAsPaid(dossierId, paymentIntent.id, email);
+      } catch (err) {
+        console.error("[webhook] dbMarkAsPaid error:", err);
+      }
       console.log(
         `[webhook] Paiement confirme pour dossier ${dossierId}, email ${email}`
       );
+
+      trackEvent("payment_complete", {
+        amount: paymentIntent.amount / 100,
+        amende_type: paymentIntent.metadata?.amendeType || "",
+      });
     }
 
     return NextResponse.json({ received: true });

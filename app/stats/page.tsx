@@ -5,11 +5,11 @@ import { getTypes } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Statistiques de contestation d'amendes — Conteste.app",
   description:
-    "Sur 2 847 amendes analys\u00e9es par Conteste.app : taux de contestation r\u00e9ussie 58%, type le plus fr\u00e9quent radar (43%), d\u00e9lai moyen 45 jours. Donn\u00e9es agr\u00e9g\u00e9es.",
+    "Sur 2 847 amendes analysées par Conteste.app : taux de contestation réussie 58%, type le plus fréquent radar (43%), délai moyen 45 jours. Données agrégées.",
   openGraph: {
     title: "Statistiques de contestation d'amendes — Conteste.app",
     description:
-      "Donn\u00e9es agr\u00e9g\u00e9es sur les contestations d'amendes analys\u00e9es par Conteste.app.",
+      "Données agrégées sur les contestations d'amendes analysées par Conteste.app.",
     url: "https://conteste.app/stats",
     siteName: "Conteste.app",
     locale: "fr_FR",
@@ -23,33 +23,33 @@ export const metadata: Metadata = {
 const stats = [
   {
     value: "2 847",
-    label: "Amendes analys\u00e9es",
+    label: "Amendes analysées",
     detail: "depuis le lancement de Conteste.app",
   },
   {
     value: "58%",
-    label: "Taux de contestation r\u00e9ussie estim\u00e9",
+    label: "Taux de contestation réussie estimé",
     detail: "sur les dossiers avec retour utilisateur",
   },
   {
     value: "43%",
     label: "Amendes radar",
-    detail: "type d'amende le plus fr\u00e9quent",
+    detail: "type d'amende le plus fréquent",
   },
   {
     value: "45j",
-    label: "D\u00e9lai moyen de traitement ANTAI",
-    detail: "pour une r\u00e9ponse \u00e0 la contestation",
+    label: "Délai moyen de traitement ANTAI",
+    detail: "pour une réponse à la contestation",
   },
   {
     value: "Paris (75)",
-    label: "D\u00e9partement le plus actif",
-    detail: "le plus de contestations analys\u00e9es",
+    label: "Département le plus actif",
+    detail: "le plus de contestations analysées",
   },
   {
     value: "64/100",
     label: "Score moyen des dossiers",
-    detail: "score de contestabilit\u00e9 moyen attribu\u00e9",
+    detail: "score de contestabilité moyen attribué",
   },
 ];
 
@@ -62,7 +62,7 @@ export default function StatsPage() {
       "@type": "Dataset",
       name: "Statistiques de contestation d'amendes en France",
       description:
-        "Donn\u00e9es agr\u00e9g\u00e9es et anonymis\u00e9es sur les contestations d'amendes analys\u00e9es par Conteste.app.",
+        "Données agrégées et anonymisées sur les contestations d'amendes analysées par Conteste.app.",
       url: "https://conteste.app/stats",
       creator: {
         "@type": "Organization",
@@ -102,8 +102,8 @@ export default function StatsPage() {
 
         <div className="bg-bleu-fond rounded-card p-6 mb-8">
           <p className="text-body text-gris-texte">
-            Sur <strong>2 847 amendes analys\u00e9es</strong> par Conteste.app, voici les
-            tendances observ\u00e9es. Ces donn\u00e9es sont agr\u00e9g\u00e9es et anonymis\u00e9es.
+            Sur <strong>2 847 amendes analysées</strong> par Conteste.app, voici les
+            tendances observées. Ces données sont agrégées et anonymisées.
           </p>
         </div>
 
@@ -124,7 +124,7 @@ export default function StatsPage() {
 
         {/* Guides populaires */}
         <section className="mb-12">
-          <h2 className="text-h2 text-gris-titre mb-4">Guides les plus consult\u00e9s</h2>
+          <h2 className="text-h2 text-gris-titre mb-4">Guides les plus consultés</h2>
           <div className="grid md:grid-cols-2 gap-4">
             {types.slice(0, 4).map((type) => (
               <Link
@@ -143,15 +143,15 @@ export default function StatsPage() {
 
         {/* Sources */}
         <section className="mb-8">
-          <h2 className="text-h2 text-gris-titre mb-4">Sources et m\u00e9thodologie</h2>
+          <h2 className="text-h2 text-gris-titre mb-4">Sources et méthodologie</h2>
           <div className="text-body text-gris-texte space-y-2">
             <p>
-              Les statistiques pr\u00e9sent\u00e9es sont issues des dossiers analys\u00e9s par Conteste.app.
-              Le taux de r\u00e9ussite est calcul\u00e9 sur la base des retours volontaires des utilisateurs.
+              Les statistiques présentées sont issues des dossiers analysés par Conteste.app.
+              Le taux de réussite est calculé sur la base des retours volontaires des utilisateurs.
             </p>
             <p>
-              Sources l\u00e9gales de r\u00e9f\u00e9rence :
-              {" "}<a href="https://www.legifrance.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-bleu-france underline">L\u00e9gifrance</a>,
+              Sources légales de référence :
+              {" "}<a href="https://www.legifrance.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-bleu-france underline">Légifrance</a>,
               {" "}<a href="https://www.antai.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-bleu-france underline">ANTAI</a>,
               {" "}<a href="https://www.service-public.fr" target="_blank" rel="noopener noreferrer" className="text-bleu-france underline">Service-public.fr</a>.
             </p>
@@ -161,7 +161,7 @@ export default function StatsPage() {
         {/* CTA */}
         <div className="bg-bleu-fond rounded-card p-8 text-center">
           <h2 className="text-h2 text-gris-titre mb-3">
-            Vous avez re\u00e7u une amende ?
+            Vous avez reçu une amende ?
           </h2>
           <p className="text-body text-gris-texte mb-6">
             Analysez gratuitement vos chances de contestation en moins de 60 secondes.

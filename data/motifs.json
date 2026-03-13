@@ -1,45 +1,45 @@
 {
   "panneau-masque": {
-    "label": "Panneau masqu\u00e9 ou non visible",
+    "label": "Panneau masqué ou non visible",
     "force": "fort",
-    "description": "Le panneau de signalisation n'\u00e9tait pas visible au moment de l'infraction",
+    "description": "Le panneau de signalisation n'était pas visible au moment de l'infraction",
     "articleCode": "R411-25 du Code de la route"
   },
   "erreur-plaque": {
     "label": "Erreur sur la plaque d'immatriculation",
     "force": "fort",
-    "description": "Le num\u00e9ro de plaque sur l'avis ne correspond pas au v\u00e9hicule",
-    "articleCode": "A9 du Code de proc\u00e9dure p\u00e9nale"
+    "description": "Le numéro de plaque sur l'avis ne correspond pas au véhicule",
+    "articleCode": "A9 du Code de procédure pénale"
   },
   "vehicule-vendu": {
-    "label": "V\u00e9hicule vendu avant l'infraction",
+    "label": "Véhicule vendu avant l'infraction",
     "force": "fort",
-    "description": "Le v\u00e9hicule avait \u00e9t\u00e9 c\u00e9d\u00e9 avant la date de l'infraction",
+    "description": "Le véhicule avait été cédé avant la date de l'infraction",
     "articleCode": "R322-4 du Code de la route"
   },
   "horodateur-defaillant": {
-    "label": "Horodateur d\u00e9faillant",
+    "label": "Horodateur défaillant",
     "force": "fort",
-    "description": "L'horodateur le plus proche \u00e9tait hors service",
+    "description": "L'horodateur le plus proche était hors service",
     "articleCode": "L2333-87 du CGCT"
   },
   "marquage-absent": {
     "label": "Marquage au sol absent",
     "force": "fort",
-    "description": "Absence de marquage au sol d\u00e9limitant la zone de stationnement",
+    "description": "Absence de marquage au sol délimitant la zone de stationnement",
     "articleCode": "R417-1 du Code de la route"
   },
   "signalisation-ambigue": {
-    "label": "Signalisation ambigu\u00eb",
+    "label": "Signalisation ambiguë",
     "force": "moyen",
-    "description": "La signalisation pr\u00eate \u00e0 confusion ou est contradictoire",
+    "description": "La signalisation prête à confusion ou est contradictoire",
     "articleCode": "R411-25 du Code de la route"
   },
   "marge-technique": {
     "label": "Marge technique du radar",
     "force": "moyen",
-    "description": "La vitesse retenue apr\u00e8s marge technique est proche du seuil",
-    "articleCode": "Arr\u00eat\u00e9 du 4 juin 2009"
+    "description": "La vitesse retenue après marge technique est proche du seuil",
+    "articleCode": "Arrêté du 4 juin 2009"
   },
   "erreur-identification": {
     "label": "Erreur d'identification du conducteur",
@@ -48,27 +48,27 @@
     "articleCode": "L121-3 du Code de la route"
   },
   "exemption-medicale": {
-    "label": "Exemption m\u00e9dicale",
+    "label": "Exemption médicale",
     "force": "fort",
-    "description": "Certificat m\u00e9dical justifiant l'impossibilit\u00e9 de porter la ceinture",
+    "description": "Certificat médical justifiant l'impossibilité de porter la ceinture",
     "articleCode": "R412-1 du Code de la route"
   },
   "feu-defaillant": {
-    "label": "Feu de signalisation d\u00e9faillant",
+    "label": "Feu de signalisation défaillant",
     "force": "fort",
-    "description": "Le feu tricolore \u00e9tait en panne ou clignotant",
+    "description": "Le feu tricolore était en panne ou clignotant",
     "articleCode": "R411-7 du Code de la route"
   },
   "kit-mains-libres": {
     "label": "Utilisation d'un kit mains-libres",
     "force": "moyen",
-    "description": "Le t\u00e9l\u00e9phone \u00e9tait utilis\u00e9 avec un kit mains-libres int\u00e9gr\u00e9",
+    "description": "Le téléphone était utilisé avec un kit mains-libres intégré",
     "articleCode": "R412-6-1 du Code de la route"
   },
   "signalisation-manquante": {
     "label": "Signalisation de stationnement manquante",
     "force": "fort",
-    "description": "Absence de panneau indiquant les r\u00e8gles de stationnement",
+    "description": "Absence de panneau indiquant les règles de stationnement",
     "articleCode": "R417-1 du Code de la route"
   }
 }

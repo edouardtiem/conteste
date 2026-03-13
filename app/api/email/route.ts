@@ -3,6 +3,8 @@ import type { PackResult, AmendeExtracted } from "@/lib/types";
 import { getResend } from "@/lib/resend";
 import { ConfirmationPaiement } from "@/emails/ConfirmationPaiement";
 import { formatDateFR } from "@/lib/utils";
+import { logEmail } from "@/lib/dossier-store";
+import { trackEvent, getClientIdFromCookie } from "@/lib/analytics";
 
 interface EmailRequestBody {
   email?: string;
@@ -50,12 +52,21 @@ export async function POST(request: NextRequest) {
       pack: packData,
     });
 
+    // Log email in DB
+    try {
+      await logEmail(body.email, body.dossierId, "confirmation");
+    } catch (err) {
+      console.error("[email] logEmail error:", err);
+    }
+
     // Si pas de clé Resend, log en console (dev mode)
     if (!resend) {
       console.log("[email] Mode dev — email non envoye");
       console.log("[email] Destinataire:", body.email);
       console.log("[email] Objet:", subject);
       console.log("[email] Contenu: [template React Email]");
+      const clientId = getClientIdFromCookie(request.headers.get("cookie"));
+      trackEvent("email_sent", { email_type: "confirmation" }, clientId);
       return NextResponse.json({
         success: true,
         message: "Email simule en mode dev",
@@ -71,6 +82,9 @@ export async function POST(request: NextRequest) {
     });
 
     console.log("[email] Email envoye:", result);
+
+    const clientId = getClientIdFromCookie(request.headers.get("cookie"));
+    trackEvent("email_sent", { email_type: "confirmation" }, clientId);
 
     return NextResponse.json({
       success: true,

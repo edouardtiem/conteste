@@ -83,10 +83,11 @@ export default function ConfirmPage() {
     setError(null);
 
     try {
+      const dossierId = localStorage.getItem("conteste_dossier_id") || undefined;
       const response = await fetch("/api/score", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(amende),
+        body: JSON.stringify({ ...amende, dossierId }),
       });
 
       const result = await response.json();

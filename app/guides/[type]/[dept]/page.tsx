@@ -10,6 +10,13 @@ import {
   generateDeptFaq,
   generateEtapes,
 } from "@/lib/data";
+import { generateDateModified, getDatePublished } from "@/lib/seo-utils";
+import { generateDeptIntro, generateLocalStats, getArticlesLoi } from "@/lib/geo-content";
+import { DepartementsVoisins } from "@/components/DepartementsVoisins";
+import { AutresInfractions } from "@/components/AutresInfractions";
+import { GuidesEditoriaux } from "@/components/GuidesEditoriaux";
+import AuthorBox from "@/components/AuthorBox";
+import SourcesBadge from "@/components/SourcesBadge";
 
 interface PageProps {
   params: { type: string; dept: string };
@@ -33,10 +40,10 @@ export function generateMetadata({ params }: PageProps): Metadata {
   if (!type || !dept) return {};
   return {
     title: `Contester une ${type.label} dans le ${dept.nom} (${dept.code}) — Conteste.app`,
-    description: `Comment contester une ${type.label.toLowerCase()} dans le ${dept.nom} (${dept.code}) ? Tribunal comp\u00e9tent : ${dept.tribunal}. D\u00e9lai : ${type.delaiJours} jours. Montant : ${type.montantForfaitaire}\u00a0\u20ac. Guide complet.`,
+    description: `Comment contester une ${type.label.toLowerCase()} dans le ${dept.nom} (${dept.code}) ? Tribunal compétent : ${dept.tribunal}. Délai : ${type.delaiJours} jours. Montant : ${type.montantForfaitaire} €. Guide complet.`,
     openGraph: {
       title: `Contester une ${type.label} dans le ${dept.nom} (${dept.code}) — Conteste.app`,
-      description: `Tribunal : ${dept.tribunal}. D\u00e9lai : ${type.delaiJours} jours. Guide complet de contestation.`,
+      description: `Tribunal : ${dept.tribunal}. Délai : ${type.delaiJours} jours. Guide complet de contestation.`,
       url: `https://conteste.app/guides/${type.slug}/${dept.code}`,
       siteName: "Conteste.app",
       locale: "fr_FR",
@@ -61,21 +68,28 @@ export default function GuideDeptPage({ params }: PageProps) {
     ? "https://www.antai.gouv.fr"
     : dept.portailCommune;
 
+  const datePublished = getDatePublished(type.slug, type.datePublished);
+  const dateModified = generateDateModified(type.slug, dept.code);
+  const intro = generateDeptIntro(type, dept);
+  const localStats = generateLocalStats(type, dept);
+  const articlesLoi = getArticlesLoi(type.slug);
+
   const jsonLd = [
     {
       "@context": "https://schema.org",
       "@type": "Article",
       headline: `Contester une ${type.label} dans le ${dept.nom} (${dept.code})`,
-      description: `Guide de contestation d'une ${type.label.toLowerCase()} dans le d\u00e9partement ${dept.nom}. Tribunal comp\u00e9tent : ${dept.tribunal}.`,
+      description: `Guide de contestation d'une ${type.label.toLowerCase()} dans le département ${dept.nom}. Tribunal compétent : ${dept.tribunal}.`,
       url: `https://conteste.app/guides/${type.slug}/${dept.code}`,
-      datePublished: "2026-03-01",
-      dateModified: "2026-03-12",
-      author: { "@type": "Organization", name: "Conteste.app" },
+      datePublished,
+      dateModified,
+      author: { "@type": "Organization", name: "Conteste.app", url: "https://conteste.app" },
       publisher: {
         "@type": "Organization",
         name: "Conteste.app",
         url: "https://conteste.app",
       },
+      reviewedBy: { "@type": "Organization", name: "Conteste.app", url: "https://conteste.app" },
     },
     {
       "@context": "https://schema.org",
@@ -93,7 +107,7 @@ export default function GuideDeptPage({ params }: PageProps) {
       "@context": "https://schema.org",
       "@type": "HowTo",
       name: `Comment contester une ${type.label.toLowerCase()} dans le ${dept.nom}`,
-      description: `\u00c9tapes pour contester une ${type.label.toLowerCase()} dans le ${dept.nom} via ${portailNom}`,
+      description: `Étapes pour contester une ${type.label.toLowerCase()} dans le ${dept.nom} via ${portailNom}`,
       step: etapes.map((e) => ({
         "@type": "HowToStep",
         position: e.numero,
@@ -136,12 +150,12 @@ export default function GuideDeptPage({ params }: PageProps) {
           Contester une {type.label.toLowerCase()} dans le {dept.nom} ({dept.code})
         </h1>
 
-        {/* Chiffre cl\u00e9 */}
+        {/* Chiffre clé */}
         <div className="bg-bleu-fond rounded-card p-6 mb-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <p className="text-[24px] md:text-[28px] font-extrabold text-bleu-france">{type.delaiJours}j</p>
-              <p className="text-[13px] text-gris-mention">D\u00e9lai de contestation</p>
+              <p className="text-[13px] text-gris-mention">Délai de contestation</p>
             </div>
             <div>
               <p className="text-[24px] md:text-[28px] font-extrabold text-bleu-france">{type.montantForfaitaire}&euro;</p>
@@ -151,7 +165,7 @@ export default function GuideDeptPage({ params }: PageProps) {
               <p className="text-[24px] md:text-[28px] font-extrabold text-bleu-france">
                 {type.pointsRetrait > 0 ? type.pointsRetrait : "0"}
               </p>
-              <p className="text-[13px] text-gris-mention">Point{type.pointsRetrait !== 1 ? "s" : ""} retir\u00e9{type.pointsRetrait !== 1 ? "s" : ""}</p>
+              <p className="text-[13px] text-gris-mention">Point{type.pointsRetrait !== 1 ? "s" : ""} retiré{type.pointsRetrait !== 1 ? "s" : ""}</p>
             </div>
             <div>
               <p className="text-[24px] md:text-[28px] font-extrabold text-bleu-france uppercase text-[16px]">
@@ -162,35 +176,58 @@ export default function GuideDeptPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Tribunal comp\u00e9tent */}
-        <section className="mb-8">
-          <h2 className="text-h2 text-gris-titre mb-4">Tribunal comp\u00e9tent</h2>
+        {/* Intro unique par département */}
+        <p className="text-body text-gris-texte mb-6 leading-relaxed">{intro}</p>
+
+        {/* Sources officielles */}
+        <div className="mb-6">
+          <SourcesBadge />
+        </div>
+
+        {/* Table des matières */}
+        <nav className="bg-[#F6F6F6] p-4 rounded-lg mb-6">
+          <p className="font-bold text-sm">Sur cette page</p>
+          <ul className="mt-2 space-y-1 list-disc list-inside">
+            <li><a href="#tribunal-competent" className="text-[14px] text-bleu-france hover:underline">Tribunal compétent</a></li>
+            <li><a href="#ce-que-vous-devez-savoir" className="text-[14px] text-bleu-france hover:underline">Ce que vous devez savoir</a></li>
+            <li><a href="#le-saviez-vous" className="text-[14px] text-bleu-france hover:underline">Le saviez-vous ?</a></li>
+            <li><a href="#motifs-contestation" className="text-[14px] text-bleu-france hover:underline">Motifs de contestation</a></li>
+            <li><a href="#articles-de-loi" className="text-[14px] text-bleu-france hover:underline">Articles de loi applicables</a></li>
+            <li><a href="#comment-contester" className="text-[14px] text-bleu-france hover:underline">Comment contester</a></li>
+            <li><a href="#questions-frequentes" className="text-[14px] text-bleu-france hover:underline">Questions fréquentes</a></li>
+            <li><a href="#departements-voisins" className="text-[14px] text-bleu-france hover:underline">Départements voisins</a></li>
+          </ul>
+        </nav>
+
+        {/* Tribunal compétent */}
+        <section id="tribunal-competent" className="mb-8">
+          <h2 className="text-h2 text-gris-titre mb-4">Tribunal compétent</h2>
           <div className="bg-white border border-gris-bordure border-l-4 border-l-bleu-france rounded-card p-6">
             <p className="text-h3 text-gris-titre mb-2">{dept.tribunal}</p>
             <p className="text-body text-gris-texte mb-1">{dept.adresseTribunal}</p>
             <p className="text-[13px] text-gris-mention">
-              R\u00e9gion : {dept.region}
+              Région : {dept.region}
             </p>
           </div>
         </section>
 
         {/* Ce que vous devez savoir */}
-        <section className="mb-8">
+        <section id="ce-que-vous-devez-savoir" className="mb-8">
           <h2 className="text-h2 text-gris-titre mb-4">Ce que vous devez savoir</h2>
           <ul className="space-y-3 text-body text-gris-texte">
             <li className="flex gap-2">
               <span className="text-bleu-france font-bold flex-shrink-0">&bull;</span>
               <span>
                 Dans le {dept.nom}, les contestations d&apos;amendes pour {type.label.toLowerCase()} sont
-                trait\u00e9es par le {dept.tribunal}. En cas de rejet de votre requ\u00eate en ex\u00e9ration,
-                c&apos;est devant cette juridiction que votre dossier sera examin\u00e9.
+                traitées par le {dept.tribunal}. En cas de rejet de votre requête en exération,
+                c&apos;est devant cette juridiction que votre dossier sera examiné.
               </span>
             </li>
             <li className="flex gap-2">
               <span className="text-bleu-france font-bold flex-shrink-0">&bull;</span>
               <span>
-                Vous disposez de {type.delaiJours} jours pour contester. Le d\u00e9lai court \u00e0 compter
-                de la date d&apos;envoi de l&apos;avis, pas de sa r\u00e9ception. Ne payez pas l&apos;amende
+                Vous disposez de {type.delaiJours} jours pour contester. Le délai court à compter
+                de la date d&apos;envoi de l&apos;avis, pas de sa réception. Ne payez pas l&apos;amende
                 avant de contester.
               </span>
             </li>
@@ -198,14 +235,27 @@ export default function GuideDeptPage({ params }: PageProps) {
               <span className="text-bleu-france font-bold flex-shrink-0">&bull;</span>
               <span>
                 La contestation se fait en ligne sur {portailNom}. Munissez-vous de votre
-                avis de contravention et de tout \u00e9l\u00e9ment de preuve pertinent.
+                avis de contravention et de tout élément de preuve pertinent.
               </span>
             </li>
           </ul>
         </section>
 
+        {/* Le saviez-vous ? */}
+        <section id="le-saviez-vous" className="mb-8">
+          <h2 className="text-h2 text-gris-titre mb-4">Le saviez-vous ?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {localStats.map((stat, i) => (
+              <div key={i} className="bg-bleu-fond border border-bleu-clair rounded-card p-4">
+                <p className="text-[14px] font-bold text-gris-titre mb-1">{stat.title}</p>
+                <p className="text-[13px] text-gris-texte">{stat.content}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Motifs de contestation */}
-        <section className="mb-8">
+        <section id="motifs-contestation" className="mb-8">
           <h2 className="text-h2 text-gris-titre mb-4">Motifs de contestation recevables</h2>
           <div className="space-y-3">
             {motifs.map((motif) => (
@@ -227,15 +277,44 @@ export default function GuideDeptPage({ params }: PageProps) {
                 </div>
                 <p className="text-body text-gris-texte mb-1">{motif.description}</p>
                 <p className="text-[13px] text-gris-mention">
-                  R\u00e9f\u00e9rence : {motif.articleCode}
+                  Référence : {motif.articleCode}
                 </p>
               </div>
             ))}
           </div>
         </section>
 
+        {/* Articles de loi */}
+        {articlesLoi.length > 0 && (
+          <section id="articles-de-loi" className="mb-8">
+            <h2 className="text-h2 text-gris-titre mb-4">Articles de loi applicables</h2>
+            <div className="space-y-3">
+              {articlesLoi.map((art) => (
+                <div key={art.article} className="bg-white border border-gris-bordure rounded-card p-4">
+                  <h3 className="text-h3 text-gris-titre mb-2">
+                    <a href={art.url} target="_blank" rel="noopener noreferrer" className="text-bleu-france hover:underline">
+                      {art.article}
+                    </a>
+                  </h3>
+                  <p className="text-body text-gris-texte">{art.texte}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* CTA intermédiaire */}
+        <div className="bg-bleu-fond border border-bleu-clair rounded-card p-6 text-center my-8">
+          <p className="text-body font-bold text-gris-titre mb-3">
+            Vous avez reçu ce type d&apos;amende ?
+          </p>
+          <a href="/contest/upload" className="inline-block bg-bleu-france text-white font-bold py-3 px-6 rounded-button hover:bg-bleu-france-hover transition-colors min-h-[48px]">
+            Analyser mon amende gratuitement
+          </a>
+        </div>
+
         {/* Comment contester */}
-        <section className="mb-8">
+        <section id="comment-contester" className="mb-8">
           <h2 className="text-h2 text-gris-titre mb-4">
             Comment contester
           </h2>
@@ -260,18 +339,24 @@ export default function GuideDeptPage({ params }: PageProps) {
                 rel="noopener noreferrer"
                 className="text-bleu-france underline hover:text-bleu-france-hover"
               >
-                Acc\u00e9der au portail de contestation &rarr;
+                Accéder au portail de contestation &rarr;
               </a>
             </p>
           )}
         </section>
 
         {/* FAQ */}
-        <section className="mb-8">
-          <h2 className="text-h2 text-gris-titre mb-4">Questions fr\u00e9quentes</h2>
+        <section id="questions-frequentes" className="mb-8">
+          <h2 className="text-h2 text-gris-titre mb-4">Questions fréquentes</h2>
           <div className="space-y-4">
-            {faq.map((item, i) => (
-              <details key={i} className="bg-white border border-gris-bordure rounded-card group">
+            {faq.slice(0, 2).map((item, i) => (
+              <div key={i} className="bg-white border border-gris-bordure rounded-card p-4">
+                <h3 className="text-h3 font-bold text-gris-titre mb-2">{item.question}</h3>
+                <p className="text-body text-gris-texte">{item.answer}</p>
+              </div>
+            ))}
+            {faq.slice(2).map((item, i) => (
+              <details key={i + 2} className="bg-white border border-gris-bordure rounded-card group">
                 <summary className="p-4 cursor-pointer text-h3 text-gris-titre list-none flex justify-between items-center">
                   {item.question}
                   <span className="text-bleu-france ml-2 flex-shrink-0 group-open:rotate-180 transition-transform">
@@ -286,14 +371,33 @@ export default function GuideDeptPage({ params }: PageProps) {
           </div>
         </section>
 
+        {/* Départements voisins */}
+        <div id="departements-voisins">
+          <DepartementsVoisins currentDeptCode={dept.code} currentType={type.slug} />
+        </div>
+
+        {/* Autres infractions */}
+        <AutresInfractions currentDeptCode={dept.code} currentDeptNom={dept.nom} currentType={type.slug} />
+
+        {/* Guides éditoriaux */}
+        <GuidesEditoriaux />
+
+        {/* Author + Sources */}
+        <AuthorBox />
+
+        {/* Date de mise à jour visible */}
+        <p className="text-[12px] text-gris-mention mt-4 mb-8">
+          Dernière mise à jour : {new Date(dateModified).toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}
+        </p>
+
         {/* CTA */}
         <div className="bg-bleu-fond rounded-card p-8 text-center">
           <h2 className="text-h2 text-gris-titre mb-3">
-            Vous avez re\u00e7u une {type.label.toLowerCase()} dans le {dept.nom} ?
+            Vous avez reçu une {type.label.toLowerCase()} dans le {dept.nom} ?
           </h2>
           <p className="text-body text-gris-texte mb-6">
             Analysez gratuitement vos chances de contestation en moins de 60 secondes.
-            Nous identifions les meilleurs motifs pour votre cas pr\u00e9cis.
+            Nous identifions les meilleurs motifs pour votre cas précis.
           </p>
           <Link
             href="/contest/upload"
