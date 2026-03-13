@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Conteste.app — Prototype Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Marianne:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       DESIGN SYSTEM — Style service public
+       Inspiré ANTAI/DSFR, adapté Conteste.app
+       ======================================== */
+
+    :root {
+      /* Palette principale — bleu République */
+      --bleu-france: #000091;
+      --bleu-france-hover: #1212FF;
+      --bleu-clair: #E3E3FD;
+      --bleu-fond: #F5F5FE;
+
+      /* Accents */
+      --vert-succes: #18753C;
+      --vert-fond: #B8FEC9;
+      --orange-warning: #D64D00;
+      --orange-fond: #FFE8E5;
+      --rouge-erreur: #CE0500;
+
+      /* Neutres */
+      --gris-titre: #161616;
+      --gris-texte: #3A3A3A;
+      --gris-mention: #666666;
+      --gris-bordure: #DDDDDD;
+      --gris-fond: #F6F6F6;
+      --blanc: #FFFFFF;
+
+      /* Typographie */
+      --font: 'Marianne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+      /* Espacements */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --space-3xl: 64px;
+
+      /* Rayons */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--gris-texte);
+      background: var(--blanc);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========================================
+       HEADER — Bande bleue République
+       ======================================== */
+
+    .header-republique {
+      background: var(--blanc);
+      border-bottom: 3px solid var(--bleu-france);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .header-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-bloc {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .logo-rf {
+      width: 44px;
+      height: 44px;
+      background: var(--bleu-france);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 11px;
+      line-height: 1.1;
+      text-align: center;
+    }
+
+    .logo-texte {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-texte .nom {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--bleu-france);
+      letter-spacing: -0.5px;
+    }
+
+    .logo-texte .baseline {
+      font-size: 12px;
+      color: var(--gris-mention);
+      font-weight: 400;
+    }
+
+    /* ========================================
+       PAGE 1 — LANDING / ACCUEIL
+       ======================================== */
+
+    .hero {
+      background: var(--bleu-fond);
+      padding: var(--space-3xl) var(--space-lg);
+      text-align: center;
+    }
+
+    .hero-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--gris-titre);
+      line-height: 1.3;
+      margin-bottom: var(--space-md);
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--gris-texte);
+      margin-bottom: var(--space-xl);
+      line-height: 1.6;
+    }
+
+    .badge-gratuit {
+      display: inline-block;
+      background: var(--vert-fond);
+      color: var(--vert-succes);
+      font-size: 13px;
+      font-weight: 700;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: 20px;
+      margin-bottom: var(--space-lg);
+    }
+
+    .btn-primaire {
+      display: inline-block;
+      background: var(--bleu-france);
+      color: var(--blanc);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
+      min-height: 48px;
+      transition: background 0.15s;
+    }
+
+    .btn-primaire:hover {
+      background: var(--bleu-france-hover);
+    }
+
+    .btn-secondaire {
+      display: inline-block;
+      background: var(--blanc);
+      color: var(--bleu-france);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 12px 24px;
+      border: 1px solid var(--bleu-france);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
+      min-height: 48px;
+      transition: background 0.15s;
+    }
+
+    .btn-secondaire:hover {
+      background: var(--bleu-fond);
+    }
+
+    /* Section étapes */
+    .section {
+      padding: var(--space-3xl) var(--space-lg);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-titre {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--gris-titre);
+      margin-bottom: var(--space-xl);
+      text-align: center;
+    }
+
+    .etapes {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .etape {
+      display: flex;
+      gap: var(--space-md);
+      align-items: flex-start;
+    }
+
+    .etape-numero {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--bleu-france);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .etape-contenu h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gris-titre);
+      margin-bottom: var(--space-xs);
+    }
+
+    .etape-contenu p {
+      font-size: 14px;
+      color: var(--gris-mention);
+    }
+
+    /* Bandeau reassurance */
+    .reassurance {
+      background: var(--gris-fond);
+      padding: var(--space-2xl) var(--space-lg);
+      border-top: 1px solid var(--gris-bordure);
+      border-bottom: 1px solid var(--gris-bordure);
+    }
+
+    .reassurance-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      text-align: center;
+    }
+
+    .reassurance-item .icone {
+      font-size: 28px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .reassurance-item .titre {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gris-titre);
+      margin-bottom: var(--space-xs);
+    }
+
+    .reassurance-item .desc {
+      font-size: 13px;
+      color: var(--gris-mention);
+    }
+
+    /* ========================================
+       PAGE 2 — UPLOAD
+       ======================================== */
+
+    .page-section {
+      padding: var(--space-2xl) var(--space-lg);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .page-titre {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--gris-titre);
+      margin-bottom: var(--space-sm);
+    }
+
+    .page-desc {
+      font-size: 15px;
+      color: var(--gris-mention);
+      margin-bottom: var(--space-xl);
+    }
+
+    .upload-zone {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .upload-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      padding: var(--space-xl) var(--space-md);
+      border: 2px dashed var(--gris-bordure);
+      border-radius: var(--radius-md);
+      background: var(--blanc);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      min-height: 120px;
+    }
+
+    .upload-btn:hover {
+      border-color: var(--bleu-france);
+      background: var(--bleu-fond);
+    }
+
+    .upload-btn .icone {
+      font-size: 32px;
+    }
+
+    .upload-btn .label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gris-titre);
+    }
+
+    .upload-hint {
+      font-size: 13px;
+      color: var(--gris-mention);
+      text-align: center;
+    }
+
+    /* Preview image */
+    .preview-zone {
+      border: 1px solid var(--gris-bordure);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .preview-img {
+      width: 100%;
+      height: 200px;
+      background: var(--gris-fond);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gris-mention);
+      font-size: 14px;
+      margin-bottom: var(--space-md);
+    }
+
+    .preview-actions {
+      display: flex;
+      gap: var(--space-md);
+    }
+
+    .preview-actions button {
+      flex: 1;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      min-height: 48px;
+      font-family: var(--font);
+    }
+
+    .btn-retry {
+      background: var(--blanc);
+      color: var(--gris-texte);
+      border: 1px solid var(--gris-bordure);
+    }
+
+    .btn-analyser {
+      background: var(--bleu-france);
+      color: white;
+      border: none;
+    }
+
+    /* Loader */
+    .loader-zone {
+      text-align: center;
+      padding: var(--space-3xl) var(--space-lg);
+    }
+
+    .loader-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--gris-bordure);
+      border-top-color: var(--bleu-france);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto var(--space-lg);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loader-texte {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--gris-titre);
+    }
+
+    .loader-sous-texte {
+      font-size: 14px;
+      color: var(--gris-mention);
+      margin-top: var(--space-sm);
+    }
+
+    /* ========================================
+       PAGE 3 — CONFIRMATION EXTRACTION
+       ======================================== */
+
+    .amende-card {
+      background: var(--blanc);
+      border: 1px solid var(--gris-bordure);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .amende-card .card-titre {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--bleu-france);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-md);
+    }
+
+    .amende-champ {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--gris-fond);
+    }
+
+    .amende-champ:last-child {
+      border-bottom: none;
+    }
+
+    .amende-champ .label {
+      font-size: 14px;
+      color: var(--gris-mention);
+    }
+
+    .amende-champ .valeur {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gris-titre);
+    }
+
+    .amende-montant {
+      text-align: center;
+      padding: var(--space-lg) 0;
+      border-bottom: 1px solid var(--gris-fond);
+      margin-bottom: var(--space-md);
+    }
+
+    .amende-montant .montant {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--gris-titre);
+    }
+
+    .amende-montant .mention {
+      font-size: 13px;
+      color: var(--gris-mention);
+    }
+
+    /* ========================================
+       PAGE 4 — SCORING
+       ======================================== */
+
+    .score-zone {
+      text-align: center;
+      padding: var(--space-xl) 0;
+      margin-bottom: var(--space-lg);
+    }
+
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: 24px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: var(--space-md);
+    }
+
+    .score-badge.fort {
+      background: var(--vert-fond);
+      color: var(--vert-succes);
+    }
+
+    .score-badge.moyen {
+      background: #FEF7DA;
+      color: #B34000;
+    }
+
+    .score-badge.faible {
+      background: var(--orange-fond);
+      color: var(--orange-warning);
+    }
+
+    .score-nombre {
+      font-size: 56px;
+      font-weight: 800;
+      color: var(--gris-titre);
+      line-height: 1;
+      margin-bottom: var(--space-sm);
+    }
+
+    .score-sur {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--gris-mention);
+    }
+
+    .score-teaser {
+      font-size: 16px;
+      color: var(--gris-texte);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* Blurred teaser */
+    .blurred-section {
+      position: relative;
+      margin: var(--space-xl) 0;
+      border: 1px solid var(--gris-bordure);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .blurred-content {
+      padding: var(--space-lg);
+      filter: blur(6px);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .blurred-content .arg-item {
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--gris-fond);
+    }
+
+    .blurred-content .arg-titre {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gris-titre);
+      margin-bottom: var(--space-xs);
+    }
+
+    .blurred-content .arg-texte {
+      font-size: 14px;
+      color: var(--gris-texte);
+    }
+
+    .blurred-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.6);
+      gap: var(--space-md);
+    }
+
+    .blurred-overlay .lock-icone {
+      font-size: 32px;
+    }
+
+    .blurred-overlay .lock-texte {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gris-titre);
+    }
+
+    /* ========================================
+       PAGE 5 — PAYWALL
+       ======================================== */
+
+    .paywall-card {
+      background: var(--blanc);
+      border: 2px solid var(--bleu-france);
+      border-radius: var(--radius-md);
+      padding: var(--space-xl);
+      text-align: center;
+      margin-bottom: var(--space-lg);
+    }
+
+    .paywall-prix {
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--bleu-france);
+      margin-bottom: var(--space-xs);
+    }
+
+    .paywall-mention {
+      font-size: 14px;
+      color: var(--gris-mention);
+      margin-bottom: var(--space-lg);
+    }
+
+    .paywall-liste {
+      list-style: none;
+      text-align: left;
+      margin-bottom: var(--space-xl);
+    }
+
+    .paywall-liste li {
+      padding: var(--space-sm) 0;
+      font-size: 15px;
+      color: var(--gris-texte);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+    }
+
+    .paywall-liste li::before {
+      content: "✓";
+      color: var(--vert-succes);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .btn-payer {
+      width: 100%;
+      background: var(--bleu-france);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: var(--font);
+      margin-bottom: var(--space-md);
+      min-height: 52px;
+    }
+
+    .btn-apple-pay {
+      width: 100%;
+      background: #000;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: var(--font);
+      min-height: 52px;
+      letter-spacing: 0.5px;
+    }
+
+    .paiement-securise {
+      font-size: 12px;
+      color: var(--gris-mention);
+      margin-top: var(--space-md);
+    }
+
+    /* ========================================
+       PAGE 6 — PACK COMPLET
+       ======================================== */
+
+    .argument-card {
+      background: var(--blanc);
+      border: 1px solid var(--gris-bordure);
+      border-left: 4px solid var(--bleu-france);
+      border-radius: var(--radius-sm);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    .argument-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gris-titre);
+      margin-bottom: var(--space-sm);
+    }
+
+    .argument-card p {
+      font-size: 14px;
+      color: var(--gris-texte);
+      margin-bottom: var(--space-md);
+    }
+
+    .argument-conseil {
+      background: var(--bleu-fond);
+      padding: var(--space-md);
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .argument-conseil .label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--bleu-france);
+      text-transform: uppercase;
+      margin-bottom: var(--space-xs);
+    }
+
+    .argument-conseil .texte {
+      font-size: 14px;
+      color: var(--gris-texte);
+    }
+
+    .argument-eviter {
+      background: var(--orange-fond);
+      padding: var(--space-md);
+      border-radius: var(--radius-sm);
+    }
+
+    .argument-eviter .label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--orange-warning);
+      text-transform: uppercase;
+      margin-bottom: var(--space-xs);
+    }
+
+    .argument-eviter .texte {
+      font-size: 14px;
+      color: var(--gris-texte);
+    }
+
+    /* Guide ANTAI */
+    .guide-card {
+      background: var(--gris-fond);
+      border-radius: var(--radius-md);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-lg);
+    }
+
+    .guide-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gris-titre);
+      margin-bottom: var(--space-lg);
+    }
+
+    .guide-etape {
+      display: flex;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .guide-etape:last-child {
+      margin-bottom: 0;
+    }
+
+    .guide-etape .num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--bleu-france);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .guide-etape .action {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gris-titre);
+      margin-bottom: var(--space-xs);
+    }
+
+    .guide-etape .detail {
+      font-size: 14px;
+      color: var(--gris-mention);
+    }
+
+    /* Bloc motif copiable */
+    .motif-bloc {
+      background: var(--blanc);
+      border: 2px solid var(--bleu-france);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+
+    .motif-bloc .titre {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--bleu-france);
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+    }
+
+    .motif-bloc .texte {
+      font-size: 15px;
+      color: var(--gris-texte);
+      line-height: 1.7;
+      margin-bottom: var(--space-md);
+      font-style: italic;
+    }
+
+    .btn-copier {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: var(--bleu-fond);
+      color: var(--bleu-france);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px 20px;
+      border: 1px solid var(--bleu-france);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: var(--font);
+      min-height: 44px;
+    }
+
+    /* Warning banner */
+    .warning-banner {
+      background: var(--orange-fond);
+      border-left: 4px solid var(--orange-warning);
+      padding: var(--space-md) var(--space-lg);
+      margin-bottom: var(--space-lg);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .warning-banner .titre {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--orange-warning);
+      margin-bottom: var(--space-xs);
+    }
+
+    .warning-banner .texte {
+      font-size: 14px;
+      color: var(--gris-texte);
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+
+    .footer {
+      background: var(--gris-fond);
+      border-top: 1px solid var(--gris-bordure);
+      padding: var(--space-2xl) var(--space-lg);
+      margin-top: var(--space-3xl);
+    }
+
+    .footer-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-liens {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-liens a {
+      font-size: 13px;
+      color: var(--gris-mention);
+      text-decoration: none;
+    }
+
+    .footer-liens a:hover {
+      color: var(--bleu-france);
+    }
+
+    .footer-mention {
+      font-size: 12px;
+      color: var(--gris-mention);
+    }
+
+    /* ========================================
+       SEPARATEURS DE PAGES (proto uniquement)
+       ======================================== */
+
+    .proto-sep {
+      background: var(--bleu-france);
+      color: white;
+      text-align: center;
+      padding: var(--space-md);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: var(--space-3xl);
+    }
+
+    /* ========================================
+       RESPONSIVE — Mobile first (390px)
+       ======================================== */
+
+    @media (max-width: 500px) {
+      .hero h1 { font-size: 24px; }
+      .reassurance-inner { grid-template-columns: 1fr; gap: var(--space-md); }
+      .upload-zone { grid-template-columns: 1fr; }
+      .score-nombre { font-size: 44px; }
+      .paywall-prix { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================
+       HEADER
+       ======================================== -->
+  <header class="header-republique">
+    <div class="header-inner">
+      <div class="logo-bloc">
+        <div class="logo-rf">RF</div>
+        <div class="logo-texte">
+          <span class="nom">conteste.app</span>
+          <span class="baseline">Contestez vos amendes en ligne</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================
+       PAGE 1 — LANDING
+       ======================================== -->
+  <div class="proto-sep">Page 1 — Accueil</div>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="badge-gratuit">Analyse gratuite</div>
+      <h1>Contestez votre amende en 60 secondes</h1>
+      <p>Prenez en photo votre avis de contravention. Nous analysons vos chances de contestation et vous guidons pas à pas sur le portail officiel.</p>
+      <a href="#" class="btn-primaire">Analyser mon amende</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-titre">Comment ca marche</h2>
+    <div class="etapes">
+      <div class="etape">
+        <div class="etape-numero">1</div>
+        <div class="etape-contenu">
+          <h3>Photographiez votre amende</h3>
+          <p>Prenez une photo ou importez le PDF de votre avis de contravention.</p>
+        </div>
+      </div>
+      <div class="etape">
+        <div class="etape-numero">2</div>
+        <div class="etape-contenu">
+          <h3>Recevez votre analyse gratuite</h3>
+          <p>Nous identifions le type d'amende et evaluons vos chances de contestation.</p>
+        </div>
+      </div>
+      <div class="etape">
+        <div class="etape-numero">3</div>
+        <div class="etape-contenu">
+          <h3>Obtenez vos arguments</h3>
+          <p>Des arguments personnalises et un guide etape par etape pour contester sur ANTAI.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reassurance">
+    <div class="reassurance-inner">
+      <div class="reassurance-item">
+        <div class="icone">&#128274;</div>
+        <div class="titre">Donnees securisees</div>
+        <div class="desc">Vos informations sont chiffrees et supprimees sous 30 jours.</div>
+      </div>
+      <div class="reassurance-item">
+        <div class="icone">&#9201;</div>
+        <div class="titre">Resultat immediat</div>
+        <div class="desc">Analyse en moins de 60 secondes, disponible 24h/24.</div>
+      </div>
+      <div class="reassurance-item">
+        <div class="icone">&#127467;&#127479;</div>
+        <div class="titre">Droit francais</div>
+        <div class="desc">Motifs fondes sur le Code de la route et la jurisprudence.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 2 — UPLOAD
+       ======================================== -->
+  <div class="proto-sep">Page 2 — Upload</div>
+
+  <section class="page-section">
+    <h2 class="page-titre">Importez votre avis de contravention</h2>
+    <p class="page-desc">Prenez une photo ou importez le document depuis vos fichiers.</p>
+
+    <div class="upload-zone">
+      <div class="upload-btn">
+        <div class="icone">&#128247;</div>
+        <div class="label">Prendre une photo</div>
+      </div>
+      <div class="upload-btn">
+        <div class="icone">&#128196;</div>
+        <div class="label">Importer un fichier</div>
+      </div>
+    </div>
+    <p class="upload-hint">JPG, PNG ou PDF — 10 Mo maximum</p>
+  </section>
+
+  <!-- Preview state -->
+  <section class="page-section">
+    <h2 class="page-titre">Verifiez votre document</h2>
+    <p class="page-desc">Assurez-vous que le texte de l'amende est lisible.</p>
+
+    <div class="preview-zone">
+      <div class="preview-img">[Apercu de l'amende]</div>
+      <div class="preview-actions">
+        <button class="btn-retry">Recommencer</button>
+        <button class="btn-analyser">Analyser</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Loading state -->
+  <section class="page-section">
+    <div class="loader-zone">
+      <div class="loader-spinner"></div>
+      <div class="loader-texte">Nous analysons votre amende...</div>
+      <div class="loader-sous-texte">Extraction des informations en cours</div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 3 — CONFIRMATION EXTRACTION
+       ======================================== -->
+  <div class="proto-sep">Page 3 — Confirmation des informations</div>
+
+  <section class="page-section">
+    <h2 class="page-titre">Votre amende</h2>
+    <p class="page-desc">Verifiez les informations extraites. Vous pouvez corriger si besoin.</p>
+
+    <div class="amende-card">
+      <div class="amende-montant">
+        <div class="montant">135 &#8364;</div>
+        <div class="mention">Amende forfaitaire</div>
+      </div>
+      <div class="card-titre">Infraction</div>
+      <div class="amende-champ">
+        <span class="label">Type</span>
+        <span class="valeur">Exces de vitesse (radar)</span>
+      </div>
+      <div class="amende-champ">
+        <span class="label">Date</span>
+        <span class="valeur">15 fevrier 2026</span>
+      </div>
+      <div class="amende-champ">
+        <span class="label">Lieu</span>
+        <span class="valeur">A6, km 234 — Rhone (69)</span>
+      </div>
+      <div class="amende-champ">
+        <span class="label">N° avis</span>
+        <span class="valeur">2026-069-4482891</span>
+      </div>
+    </div>
+
+    <div class="amende-card">
+      <div class="card-titre">Contrevenant</div>
+      <div class="amende-champ">
+        <span class="label">Nom</span>
+        <span class="valeur">Jean Dupont</span>
+      </div>
+      <div class="amende-champ">
+        <span class="label">Adresse</span>
+        <span class="valeur">12 rue de la Paix, 75002 Paris</span>
+      </div>
+    </div>
+
+    <div class="amende-card" style="background: var(--bleu-fond); border-color: var(--bleu-clair);">
+      <div class="amende-champ">
+        <span class="label">Date limite de contestation</span>
+        <span class="valeur" style="color: var(--bleu-france);">1er avril 2026</span>
+      </div>
+      <div style="font-size: 13px; color: var(--gris-mention); margin-top: var(--space-sm);">
+        Il vous reste 20 jours pour contester.
+      </div>
+    </div>
+
+    <button class="btn-primaire" style="width: 100%;">C'est correct, analyser mes chances</button>
+    <div style="text-align: center; margin-top: var(--space-md);">
+      <a href="#" style="font-size: 14px; color: var(--gris-mention);">Corriger une information</a>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 4 — SCORING
+       ======================================== -->
+  <div class="proto-sep">Page 4 — Score (gratuit)</div>
+
+  <section class="page-section">
+    <div class="score-zone">
+      <div class="score-badge fort">Bonne chance de succes</div>
+      <div class="score-nombre">78<span class="score-sur">/100</span></div>
+      <p class="score-teaser">Nous avons identifie plusieurs elements en votre faveur pour cette amende radar dans le Rhone.</p>
+    </div>
+
+    <!-- Blurred teaser -->
+    <div class="blurred-section">
+      <div class="blurred-content">
+        <div class="arg-item">
+          <div class="arg-titre">Signalisation non conforme</div>
+          <div class="arg-texte">Le panneau de limitation de vitesse presente des irregularites qui peuvent etre invoquees dans votre contestation aupres du tribunal competent.</div>
+        </div>
+        <div class="arg-item">
+          <div class="arg-titre">Erreur sur le proces-verbal</div>
+          <div class="arg-texte">Nous avons detecte une incoherence dans les informations du PV qui constitue un vice de forme exploitable dans votre demarche.</div>
+        </div>
+        <div class="arg-item">
+          <div class="arg-titre">Conditions de verbalisation</div>
+          <div class="arg-texte">Les circonstances de la verbalisation presentent des elements contestables au regard de la reglementation en vigueur.</div>
+        </div>
+      </div>
+      <div class="blurred-overlay">
+        <div class="lock-icone">&#128274;</div>
+        <div class="lock-texte">3 arguments personnalises</div>
+        <button class="btn-primaire">Debloquer mon dossier — 14,90 &#8364;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Warning example -->
+  <section class="page-section">
+    <p style="font-size: 13px; color: var(--gris-mention); margin-bottom: var(--space-md); text-transform: uppercase; font-weight: 700;">Exemple : alerte delai depasse</p>
+    <div class="warning-banner">
+      <div class="titre">Delai de contestation depasse</div>
+      <div class="texte">Le delai legal de 45 jours pour contester cette amende est depasse depuis le 2 mars 2026. Nous ne pouvons malheureusement pas generer de dossier de contestation.</div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 5 — PAYWALL
+       ======================================== -->
+  <div class="proto-sep">Page 5 — Paiement</div>
+
+  <section class="page-section">
+    <div class="paywall-card">
+      <div class="paywall-prix">14,90 &#8364;</div>
+      <div class="paywall-mention">Paiement unique — pas d'abonnement</div>
+
+      <ul class="paywall-liste">
+        <li>2 a 3 arguments personnalises pour votre cas</li>
+        <li>Guide etape par etape pour contester sur ANTAI</li>
+        <li>Motif de contestation pret a copier-coller</li>
+        <li>Recapitulatif envoye par email</li>
+      </ul>
+
+      <button class="btn-apple-pay"> Pay</button>
+      <div style="text-align: center; margin: var(--space-md) 0; font-size: 13px; color: var(--gris-mention);">ou</div>
+      <button class="btn-payer">Payer par carte bancaire</button>
+
+      <p class="paiement-securise">&#128274; Paiement securise par Stripe — Vos donnees bancaires ne sont jamais stockees.</p>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PAGE 6 — PACK COMPLET
+       ======================================== -->
+  <div class="proto-sep">Page 6 — Dossier complet</div>
+
+  <section class="page-section">
+    <h2 class="page-titre">Votre dossier de contestation</h2>
+    <p class="page-desc">Vos arguments et votre guide personnalise pour contester cette amende radar de 135 &#8364;.</p>
+
+    <!-- Arguments -->
+    <div style="margin-bottom: var(--space-xl);">
+      <div class="argument-card">
+        <h3>Signalisation non conforme</h3>
+        <p>Le panneau de limitation de vitesse situe avant le radar de l'A6 au km 234 n'est pas conforme a l'arrete prefectoral du 15 janvier 2024. La distance reglementaire entre le panneau et le dispositif de controle n'est pas respectee.</p>
+        <div class="argument-conseil">
+          <div class="label">A mentionner</div>
+          <div class="texte">Citez l'article R411-25 du Code de la route et demandez la production de l'arrete prefectoral fixant la limitation de vitesse sur ce troncon.</div>
+        </div>
+        <div class="argument-eviter">
+          <div class="label">A eviter</div>
+          <div class="texte">Ne contestez pas la vitesse mesuree elle-meme — concentrez-vous sur la signalisation.</div>
+        </div>
+      </div>
+
+      <div class="argument-card">
+        <h3>Marge technique du radar</h3>
+        <p>Pour un radar fixe a cette vitesse, la marge technique est de 5 km/h. Votre vitesse retenue apres correction pourrait se situer en dessous du seuil de verbalisation applicable sur ce troncon.</p>
+        <div class="argument-conseil">
+          <div class="label">A mentionner</div>
+          <div class="texte">Demandez la verification de l'homologation et de la derniere date de calibration du radar concerne.</div>
+        </div>
+        <div class="argument-eviter">
+          <div class="label">A eviter</div>
+          <div class="texte">N'affirmez pas que le radar est defaillant sans preuve — demandez la verification officielle.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guide ANTAI -->
+    <div class="guide-card">
+      <h3>Guide de contestation — ANTAI</h3>
+
+      <div class="guide-etape">
+        <div class="num">1</div>
+        <div>
+          <div class="action">Rendez-vous sur le portail ANTAI</div>
+          <div class="detail">Allez sur antai.gouv.fr et cliquez sur "Contester en ligne".</div>
+        </div>
+      </div>
+
+      <div class="guide-etape">
+        <div class="num">2</div>
+        <div>
+          <div class="action">Saisissez votre numero d'avis</div>
+          <div class="detail">Entrez le numero 2026-069-4482891 et votre nom de famille.</div>
+        </div>
+      </div>
+
+      <div class="guide-etape">
+        <div class="num">3</div>
+        <div>
+          <div class="action">Selectionnez "Je conteste"</div>
+          <div class="detail">Choisissez le motif "Autre motif" dans le menu deroulant.</div>
+        </div>
+      </div>
+
+      <div class="guide-etape">
+        <div class="num">4</div>
+        <div>
+          <div class="action">Copiez le motif ci-dessous</div>
+          <div class="detail">Collez le texte dans le champ "Motif de la contestation".</div>
+        </div>
+      </div>
+
+      <div class="guide-etape">
+        <div class="num">5</div>
+        <div>
+          <div class="action">Validez et conservez l'accuse</div>
+          <div class="detail">Telechargez l'accuse de reception — il fait foi en cas de litige.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Motif copiable -->
+    <div class="motif-bloc">
+      <div class="titre">Motif de contestation — a copier</div>
+      <div class="texte">
+        "Je conteste l'avis de contravention n°2026-069-4482891 du 15 fevrier 2026 pour les motifs suivants : la signalisation de la limitation de vitesse sur le troncon concerne de l'A6 (km 234) ne respecte pas les dispositions de l'article R411-25 du Code de la route. Je demande la production de l'arrete prefectoral fixant cette limitation ainsi que le certificat de verification du dispositif de controle. En l'absence de ces elements, la contravention n'est pas valablement etablie."
+      </div>
+      <button class="btn-copier">&#128203; Copier le motif</button>
+    </div>
+
+    <button class="btn-primaire" style="width: 100%;">Recevoir par email</button>
+  </section>
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-liens">
+        <a href="#">Mentions legales</a>
+        <a href="#">CGU</a>
+        <a href="#">Politique de confidentialite</a>
+        <a href="#">Contact</a>
+      </div>
+      <p class="footer-mention">Conteste.app est un service d'aide a la contestation. Ce n'est pas un cabinet d'avocats. Aucune garantie de resultat n'est fournie.</p>
+      <p class="footer-mention" style="margin-top: var(--space-sm);">© 2026 Conteste.app — Tous droits reserves</p>
+    </div>
+  </footer>
+
+</body>
+</html>

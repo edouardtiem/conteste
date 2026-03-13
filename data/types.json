@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "radar",
+    "label": "Amende radar",
+    "portail": "antai",
+    "delaiJours": 45,
+    "montantForfaitaire": 135,
+    "pointsRetrait": 1,
+    "motifsPrincipaux": ["panneau-masque", "erreur-plaque", "vehicule-vendu", "marge-technique"],
+    "description": "Exc\u00e8s de vitesse d\u00e9tect\u00e9 par radar automatique"
+  },
+  {
+    "slug": "stationnement-fps",
+    "label": "PV stationnement (FPS)",
+    "portail": "commune",
+    "delaiJours": 90,
+    "montantForfaitaire": 35,
+    "pointsRetrait": 0,
+    "motifsPrincipaux": ["horodateur-defaillant", "marquage-absent", "signalisation-manquante"],
+    "description": "Forfait post-stationnement"
+  },
+  {
+    "slug": "feux-rouges",
+    "label": "Amende feu rouge",
+    "portail": "antai",
+    "delaiJours": 45,
+    "montantForfaitaire": 135,
+    "pointsRetrait": 4,
+    "motifsPrincipaux": ["signalisation-ambigue", "erreur-plaque", "feu-defaillant"],
+    "description": "Franchissement de feu rouge"
+  },
+  {
+    "slug": "ceinture",
+    "label": "Amende ceinture de s\u00e9curit\u00e9",
+    "portail": "antai",
+    "delaiJours": 45,
+    "montantForfaitaire": 135,
+    "pointsRetrait": 3,
+    "motifsPrincipaux": ["erreur-identification", "exemption-medicale"],
+    "description": "Non-port de la ceinture de s\u00e9curit\u00e9"
+  },
+  {
+    "slug": "telephone",
+    "label": "Amende t\u00e9l\u00e9phone au volant",
+    "portail": "antai",
+    "delaiJours": 45,
+    "montantForfaitaire": 135,
+    "pointsRetrait": 3,
+    "motifsPrincipaux": ["erreur-identification", "kit-mains-libres"],
+    "description": "Usage du t\u00e9l\u00e9phone au volant"
+  }
+]

@@ -1,0 +1,123 @@
+# Changelog -- Conteste.app
+
+Toutes les modifications notables du projet sont documentees ici.
+
+Format base sur [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
+
+---
+
+## 2026-03-12
+
+### Track A -- Application
+
+- [x] **A1 : Setup Next.js 14 + TypeScript strict + Tailwind + PWA**
+  - Next.js 14.2.35 avec App Router
+  - TypeScript strict mode
+  - Tailwind CSS 3.4 avec tokens DSFR (palette bleu France, police Marianne, espacements 8px)
+  - PWA via @serwist/next 9.5.6, manifest.json dans /public/
+  - Validation env via Zod 4 (non bloquante, warnings)
+
+- [x] **A2 : Composants upload (CameraCapture, FileImport, ImageCompressor, ImagePreview, UploadZone)**
+  - `CameraCapture` : input file avec `capture="environment"` pour camera arriere mobile
+  - `FileImport` : input file classique (image/* + PDF)
+  - `ImageCompressor` : compression canvas API, max 1600px, JPEG 0.82, cible 700KB, reduction iterative
+  - `ImagePreview` : apercu image (avec ObjectURL) ou indication PDF, boutons Recommencer/Analyser
+  - `UploadZone` : orchestrateur avec state machine (idle/uploading/preview/analyzing/error), barre de progression simulee, validation taille (10Mo) et format
+
+- [x] **A3 : API Extract (Claude Vision + mock)**
+  - Route `POST /api/extract` avec FormData
+  - Claude Vision (claude-sonnet-4-20250514) pour extraction OCR
+  - Support image (JPEG, PNG, WebP) et PDF natif
+  - Mock fallback si `ANTHROPIC_API_KEY` absente
+  - Gestion confidence < 0.3 (rejet), document illisible (rejet), parsing JSON robuste (regex `/{[\s\S]*}/`)
+  - Calcul automatique de la date limite de contestation (+45 jours)
+
+- [x] **A4 : API Score + pages Confirm/Scoring (blurred teaser, cas bloquants)**
+  - Route `POST /api/score` avec body JSON (AmendeExtracted)
+  - 3 cas bloquants detectes : delai depasse, montant a 0, amende majoree
+  - Scoring via Claude avec system prompt juridique
+  - Page Confirm : affichage des donnees extraites, mode edition inline, AmendeCard component
+  - Page Scoring : score /100, ScoreBadge (fort/moyen/faible), WarningBanner pour alertes, BlurredTeaser pour arguments floutes, CTA vers paywall
+  - Mock fallback avec score 78/100 "fort" et 3 arguments preview
+
+- [x] **A5 : Stripe Payment Intent + Webhook + page Paywall**
+  - Route `POST /api/payment` : creation PaymentIntent 14,90 EUR (1490 centimes)
+  - Route `POST /api/webhook` : reception events Stripe, verification signature, idempotence via payment-store
+  - `lib/stripe.ts` : singleton Stripe client-side avec loadStripe
+  - `lib/payment-store.ts` : store in-memory (Map) pour paiements et packs
+  - Page Paywall : champ email, Stripe Elements avec PaymentElement (tabs layout), Apple Pay / Google Pay auto
+  - Mode dev sans Stripe : bouton "Simuler le paiement (dev)" qui bypass le paiement
+
+- [x] **A6 : API Pack + page Pack (ArgumentCard, AntaiGuide, CopyMotifBlock)**
+  - Route `POST /api/pack` : verification paiement (bypass en dev), idempotence pack, generation via Claude ou mock
+  - Mapping snake_case (Claude) vers camelCase (TypeScript)
+  - `ArgumentCard` : titre, explication, bloc "A mentionner" (bleu), bloc "A eviter" (orange)
+  - `AntaiGuide` : guide etape par etape avec numeros, pieces justificatives
+  - `CopyMotifBlock` : texte copier-coller avec bouton clipboard API + fallback execCommand
+  - Page Pack : confirmation paiement (vert), arguments, motif copiable, guide ANTAI, lien ANTAI externe, envoi email
+
+- [x] **A7 : Email Resend (template ConfirmationPaiement avec referral)**
+  - Route `POST /api/email` : envoi via Resend ou log console en dev
+  - Template React Email `ConfirmationPaiement.tsx` : header bleu France, recap amende, arguments numerotes, guide ANTAI complet, motif recommande encadre, rappel date limite (orange), CTA "Acceder a mon dossier", bloc referral ("tapez amendes dans votre recherche"), footer mentions legales + desinscription
+  - `lib/resend.ts` : singleton Resend avec fallback null
+
+### Track B -- SEO/GEO
+
+- [x] **B1 : Data layer (types.json, departements.json, motifs.json)**
+  - `data/types.json` : 5 types d'amendes (radar, stationnement-fps, feux-rouges, ceinture, telephone) avec slug, label, portail, delaiJours, montantForfaitaire, pointsRetrait, motifsPrincipaux, description
+  - `data/departements.json` : 96 departements metropolitains (01 a 95 + 2A, 2B) avec code, nom, region, tribunal, adresseTribunal, portailCommune
+  - `data/motifs.json` : 12 motifs de contestation (panneau-masque, erreur-plaque, vehicule-vendu, horodateur-defaillant, marquage-absent, signalisation-ambigue, marge-technique, erreur-identification, exemption-medicale, feu-defaillant, kit-mains-libres, signalisation-manquante) avec label, force (fort/moyen), description, articleCode
+  - `lib/data.ts` : loaders typesafe (getTypes, getDepartements, getMotifs, getMotifsByKeys), generateurs FAQ (generateTypeFaq, generateDeptFaq), generateur etapes (generateEtapes)
+
+- [x] **B2 : 493 pages statiques (5 types x 96 departements + index + speciales)**
+  - `app/guides/page.tsx` : index guides avec cards par type, metadata, Schema.org CollectionPage
+  - `app/guides/[type]/page.tsx` : guide par type avec generateStaticParams (5 pages), chiffres cles, resume, motifs, etapes, FAQ, liste departements, Schema.org (Article + FAQPage + HowTo + BreadcrumbList)
+  - `app/guides/[type]/[dept]/page.tsx` : guide par departement avec generateStaticParams (480 pages), tribunal competent, chiffres cles, motifs, etapes, FAQ departementale, Schema.org complet
+  - `app/guides/delai-contestation-amende/page.tsx` : page speciale SEO avec tableau recapitulatif des delais, FAQ, Schema.org
+  - `app/guides/contester-amende-radar/page.tsx` : page speciale SEO avec 4 motifs detailles, demarche 6 etapes, references legales, FAQ
+  - `app/guides/antai-comment-contester/page.tsx` : page speciale SEO avec procedure ANTAI 8 etapes, conseils redaction, suivi dossier, FAQ
+
+- [x] **B3 : Pipeline contenu (donnees statiques en JSON, pret pour Claude API)**
+  - Donnees statiques chargees depuis les fichiers JSON au build time
+  - FAQ generees dynamiquement par type et departement via `lib/data.ts`
+  - Etapes de contestation adaptees au portail (ANTAI vs commune)
+  - Architecture prete pour enrichissement via Claude API (contenu genere a la volee)
+
+- [x] **B4 : Page /stats/ avec donnees agregees**
+  - 6 metriques cles : 2847 amendes analysees, 58% taux de reussite, 43% amendes radar, 45j delai ANTAI, Paris (75) departement le plus actif, 64/100 score moyen
+  - Guides populaires (top 4 types)
+  - Sources et methodologie
+  - Schema.org Dataset + BreadcrumbList
+
+- [x] **B5 : sitemap.xml, robots.txt, Schema.org, metadata complete**
+  - `app/sitemap.ts` : sitemap dynamique avec toutes les URLs (landing + guides index + 5 types + 480 depts + stats)
+  - `app/robots.ts` : allow /, disallow /contest/ et /api/, reference sitemap
+  - Metadata Next.js sur chaque page : title, description, openGraph, alternates (canonical)
+  - Breadcrumbs aria-label sur toutes les pages SEO
+
+### Composants UI
+
+- [x] `ScoreBadge` : badge colore par niveau (fort=vert, moyen=jaune, faible=orange)
+- [x] `WarningBanner` : banniere d'alerte orange avec titre et contenu
+- [x] `BlurredTeaser` : contenu floute (blur 6px) avec overlay cadenas et message
+- [x] `AmendeCard` : card recapitulative de l'amende avec InfoRow
+- [x] `ArgumentCard` : card argument avec explication, "A mentionner", "A eviter"
+- [x] `AntaiGuide` : guide ANTAI avec etapes numerotees et pieces justificatives
+- [x] `CopyMotifBlock` : bloc copier-coller avec clipboard API + fallback
+
+### Lib
+
+- [x] `types.ts` : modele de donnees complet (AmendeExtracted, ScoringResult, PackResult, Dossier, FeedbackDossier, TokenDossierGratuit, UtilisateurEmail, ApiResponse, prix MVP)
+- [x] `utils.ts` : formatEuros, formatDateFR, calculerDateLimite, estDelaiDepasse, joursRestants, generateId, cn
+- [x] `data.ts` : data layer SEO complet avec loaders, generateurs FAQ et etapes
+- [x] `stripe.ts` : singleton Stripe client-side
+- [x] `payment-store.ts` : store in-memory pour paiements et packs
+- [x] `resend.ts` : singleton Resend avec fallback null
+- [x] `env.ts` : validation Zod des variables d'environnement (non bloquante)
+
+### Tests
+
+- [x] Build complet : 493 pages, 0 erreur
+- [x] Tests unitaires : `tests/unit/utils.test.ts`, `tests/unit/types.test.ts`
+- [x] Tests API : `tests/api/extract.test.ts`, `tests/api/score.test.ts`
+- [x] Setup Vitest + jsdom + Testing Library
