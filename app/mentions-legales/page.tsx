@@ -22,23 +22,22 @@ export default function MentionsLegales() {
         </p>
         <ul className="list-none space-y-1">
           <li>
-            <strong>Raison sociale :</strong> [a completer par le client]
+            <strong>Raison sociale :</strong> ETH
           </li>
           <li>
-            <strong>Forme juridique :</strong> [a completer par le client]
+            <strong>Forme juridique :</strong> SAS (Societe par actions simplifiee)
           </li>
           <li>
-            <strong>SIRET :</strong> [a completer par le client]
+            <strong>SIRET :</strong> 850 365 701 00026
           </li>
           <li>
-            <strong>Siege social :</strong> [a completer par le client]
+            <strong>Siege social :</strong> 22 place de l&apos;Ancienne Boucherie, 14000 Caen
           </li>
           <li>
-            <strong>Capital social :</strong> [a completer par le client]
+            <strong>Capital social :</strong> 1 000,00 &euro;
           </li>
           <li>
-            <strong>Numero TVA intracommunautaire :</strong> [a completer par le
-            client]
+            <strong>Numero TVA intracommunautaire :</strong> FR25850365701
           </li>
         </ul>
       </section>
@@ -49,7 +48,7 @@ export default function MentionsLegales() {
         <h2 className="text-[18px] font-bold text-gris-titre mb-3">
           Directeur de la publication
         </h2>
-        <p>[A completer par le client]</p>
+        <p>Edouard Tiem</p>
       </section>
 
       <hr className="border-gris-bordure mb-8" />
