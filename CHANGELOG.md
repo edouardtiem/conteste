@@ -6,6 +6,32 @@ Format base sur [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
 ---
 
+## 2026-03-15
+
+### SEO V2 — Chantier 1 : Bugs critiques
+
+→ [ADR-005](docs/decisions/005-seo-ameliorations-v2.md)
+
+- [x] **Accents corrigés** : toutes les chaînes de `lib/geo-content.ts` réécrites en UTF-8 natif (département, réussite, données, sécurité, téléphone, etc.) — les intros, stats locales et articles de loi s'affichent maintenant avec les bons accents en production
+- [x] **Prépositions géographiques** : création de `lib/geo.ts` avec `prepositionDept()` — "à Paris", "en Gironde", "en Alpes-Maritimes", "dans le Finistère". Intégré dans `geo-content.ts`, `data.ts` (FAQ), `[dept]/page.tsx` (titles, H1, meta, JSON-LD, CTA, sections)
+- [x] **Capitalisation titles** : `type.label` en minuscules après "une" dans tous les titres, H1, meta descriptions, JSON-LD headline — "Contester une amende radar" au lieu de "Contester une Amende radar"
+- [x] **Typo corrigée** : "exération" → "exonération" dans la section "Ce que vous devez savoir"
+- [x] **Régions avec accents** : clés `axesParRegion` corrigées (Île-de-France, Auvergne-Rhône-Alpes, Provence-Alpes-Côte d'Azur, Bourgogne-Franche-Comté)
+
+#### Fichiers créés
+- `lib/geo.ts` — helper prépositions géographiques françaises
+- `docs/decisions/005-seo-ameliorations-v2.md` — ADR plan SEO V2 (5 chantiers)
+
+#### Fichiers modifiés
+- `lib/geo-content.ts` — accents restaurés, prépositions dynamiques, régions corrigées
+- `lib/data.ts` — prépositions dans `generateDeptFaq()`
+- `app/guides/[type]/[dept]/page.tsx` — prépositions, capitalisation, typo exonération
+- `app/guides/[type]/page.tsx` — capitalisation titles
+- `docs/backlog.md` — ajout section P0.5 SEO V2
+- `CHANGELOG.md` — cette entrée
+
+---
+
 ## 2026-03-13
 
 ### P0 SEO — Anti-déréférencement Google

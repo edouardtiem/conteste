@@ -3,6 +3,7 @@
 import typesData from "@/data/types.json";
 import departementsData from "@/data/departements.json";
 import motifsData from "@/data/motifs.json";
+import { prepositionDept } from "@/lib/geo";
 
 // --- Types ---
 
@@ -32,7 +33,7 @@ export interface Departement {
   prefectureUrl: string;
   specificites: string[];
   population: number;
-  densite: "très urbain" | "urbain" | "semi-rural" | "rural";
+  densite: "tr\u00e8s urbain" | "urbain" | "semi-rural" | "rural";
 }
 
 export interface Motif {
@@ -242,25 +243,26 @@ export function generateDeptFaq(
 ): Array<{ question: string; answer: string }> {
   const portailNom = type.portail === "antai" ? "ANTAI" : "le portail de la commune";
   const articleRef = typeArticleRef(type.slug);
+  const prep = prepositionDept(dept.nom);
   return [
     {
-      question: `Comment contester une ${type.label.toLowerCase()} dans le ${dept.nom} (${dept.code}) ?`,
-      answer: `Pour contester une ${type.label.toLowerCase()} dans le ${dept.nom}, vous devez adresser votre requ\u00eate via ${portailNom} dans un d\u00e9lai de ${type.delaiJours} jours. ${articleRef ? `Selon ${articleRef}, ` : ""}le tribunal comp\u00e9tent est le ${dept.tribunal}. D\u2019apr\u00e8s les donn\u00e9es ONISR 2024, les contestations accompagn\u00e9es de preuves document\u00e9es ont un meilleur taux d\u2019aboutissement.`,
+      question: `Comment contester une ${type.label.toLowerCase()} ${prep} (${dept.code}) ?`,
+      answer: `Pour contester une ${type.label.toLowerCase()} ${prep}, vous devez adresser votre requ\u00eate via ${portailNom} dans un d\u00e9lai de ${type.delaiJours} jours. ${articleRef ? `Selon ${articleRef}, ` : ""}le tribunal comp\u00e9tent est le ${dept.tribunal}. D\u2019apr\u00e8s les donn\u00e9es ONISR 2024, les contestations accompagn\u00e9es de preuves document\u00e9es ont un meilleur taux d\u2019aboutissement.`,
     },
     {
-      question: `Quel tribunal est comp\u00e9tent dans le ${dept.nom} ?`,
-      answer: `Le tribunal comp\u00e9tent pour les contestations d\u2019amendes dans le ${dept.nom} est le ${dept.tribunal}, situ\u00e9 au ${dept.adresseTribunal}. C\u2019est devant cette juridiction que votre dossier sera examin\u00e9 en cas de rejet de votre requ\u00eate en exon\u00e9ration.`,
+      question: `Quel tribunal est comp\u00e9tent ${prep} ?`,
+      answer: `Le tribunal comp\u00e9tent pour les contestations d\u2019amendes ${prep} est le ${dept.tribunal}, situ\u00e9 au ${dept.adresseTribunal}. C\u2019est devant cette juridiction que votre dossier sera examin\u00e9 en cas de rejet de votre requ\u00eate en exon\u00e9ration.`,
     },
     {
-      question: `Quel est le d\u00e9lai de contestation dans le ${dept.nom} ?`,
+      question: `Quel est le d\u00e9lai de contestation ${prep} ?`,
       answer: `Le d\u00e9lai de contestation est de ${type.delaiJours} jours, identique sur tout le territoire fran\u00e7ais. Ce d\u00e9lai court \u00e0 compter de la date d\u2019envoi de l\u2019avis de contravention pour une ${type.label.toLowerCase()}, et non de sa r\u00e9ception.`,
     },
     {
-      question: `Faut-il payer l\u2019amende avant de contester dans le ${dept.nom} ?`,
+      question: `Faut-il payer l\u2019amende avant de contester ${prep} ?`,
       answer: `Non, vous ne devez pas payer l\u2019amende avant de contester. Le paiement vaut reconnaissance de l\u2019infraction et rend la contestation impossible. Vous pouvez en revanche \u00eatre amen\u00e9 \u00e0 consigner le montant de ${type.montantForfaitaire} \u20ac, ce qui est juridiquement diff\u00e9rent du paiement et n\u2019emporte pas reconnaissance de l\u2019infraction.`,
     },
     {
-      question: `Quels sont les motifs de contestation les plus efficaces dans le ${dept.nom} ?`,
+      question: `Quels sont les motifs de contestation les plus efficaces ${prep} ?`,
       answer: `Les motifs les plus fr\u00e9quemment invoqu\u00e9s pour une ${type.label.toLowerCase()} sont : ${type.motifsPrincipaux.map((m) => {
         const motif = getMotifs()[m];
         return motif ? motif.label.toLowerCase() : m;

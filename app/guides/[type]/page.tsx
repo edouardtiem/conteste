@@ -26,11 +26,11 @@ export function generateMetadata({ params }: PageProps): Metadata {
   const type = getTypeBySlug(params.type);
   if (!type) return {};
   return {
-    title: `Contester une ${type.label} — Guide complet ${new Date().getFullYear()} | Conteste.app`,
-    description: `Comment contester une ${type.label.toLowerCase()} en France ? Délai de ${type.delaiJours} jours, montant ${type.montantForfaitaire} €, motifs recevables et démarches sur ${type.portail === "antai" ? "ANTAI" : "le portail communal"}. Guide complet.`,
+    title: `Contester une ${type.label.toLowerCase()} \u2014 Guide complet ${new Date().getFullYear()} | Conteste.app`,
+    description: `Comment contester une ${type.label.toLowerCase()} en France ? D\u00e9lai de ${type.delaiJours} jours, montant ${type.montantForfaitaire} \u20ac, motifs recevables et d\u00e9marches sur ${type.portail === "antai" ? "ANTAI" : "le portail communal"}. Guide complet.`,
     openGraph: {
-      title: `Contester une ${type.label} — Guide complet | Conteste.app`,
-      description: `Délai de ${type.delaiJours} jours, montant ${type.montantForfaitaire} €, motifs recevables. Guide complet pour contester.`,
+      title: `Contester une ${type.label.toLowerCase()} \u2014 Guide complet | Conteste.app`,
+      description: `D\u00e9lai de ${type.delaiJours} jours, montant ${type.montantForfaitaire} \u20ac, motifs recevables. Guide complet pour contester.`,
       url: `https://conteste.app/guides/${type.slug}`,
       siteName: "Conteste.app",
       locale: "fr_FR",
@@ -38,8 +38,8 @@ export function generateMetadata({ params }: PageProps): Metadata {
     },
     twitter: {
       card: "summary",
-      title: `Contester une ${type.label} — Guide complet`,
-      description: `Délai de ${type.delaiJours} jours, montant ${type.montantForfaitaire} €. Guide complet pour contester.`,
+      title: `Contester une ${type.label.toLowerCase()} \u2014 Guide complet`,
+      description: `D\u00e9lai de ${type.delaiJours} jours, montant ${type.montantForfaitaire} \u20ac. Guide complet pour contester.`,
     },
     alternates: {
       canonical: `https://conteste.app/guides/${type.slug}`,
@@ -80,7 +80,7 @@ export default function GuideTypePage({ params }: PageProps) {
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      headline: `Contester une ${type.label}`,
+      headline: `Contester une ${type.label.toLowerCase()}`,
       description: type.description,
       url: `https://conteste.app/guides/${type.slug}`,
       datePublished,
@@ -108,7 +108,7 @@ export default function GuideTypePage({ params }: PageProps) {
       "@context": "https://schema.org",
       "@type": "HowTo",
       name: `Comment contester une ${type.label.toLowerCase()}`,
-      description: `Étapes pour contester une ${type.label.toLowerCase()} sur ${portailNom}`,
+      description: `\u00c9tapes pour contester une ${type.label.toLowerCase()} sur ${portailNom}`,
       step: etapes.map((e) => ({
         "@type": "HowToStep",
         position: e.numero,
@@ -148,17 +148,17 @@ export default function GuideTypePage({ params }: PageProps) {
           Contester une {type.label.toLowerCase()}
         </h1>
 
-        {/* Chiffre clé */}
+        {/* Chiffre cl\u00e9 */}
         <div className="bg-bleu-fond rounded-card p-6 mb-8">
           <p className="text-[28px] md:text-[36px] font-extrabold text-bleu-france mb-1">
             {type.delaiJours} jours
           </p>
           <p className="text-body text-gris-texte">
-            pour contester &mdash; délai légal à compter de la date d&apos;envoi de l&apos;avis
+            pour contester &mdash; d\u00e9lai l\u00e9gal \u00e0 compter de la date d&apos;envoi de l&apos;avis
           </p>
         </div>
 
-        {/* Table des matières */}
+        {/* Table des mati\u00e8res */}
         <nav className="bg-[#F6F6F6] p-4 rounded-lg mb-6">
           <p className="font-bold text-sm">Sur cette page</p>
           <ul className="mt-2 space-y-1 list-disc list-inside">
@@ -166,13 +166,13 @@ export default function GuideTypePage({ params }: PageProps) {
             <li><a href="#motifs-contestation" className="text-[14px] text-bleu-france hover:underline">Motifs de contestation</a></li>
             <li><a href="#articles-de-loi" className="text-[14px] text-bleu-france hover:underline">Articles de loi applicables</a></li>
             <li><a href="#comment-contester" className="text-[14px] text-bleu-france hover:underline">Comment contester</a></li>
-            <li><a href="#questions-frequentes" className="text-[14px] text-bleu-france hover:underline">Questions fréquentes</a></li>
+            <li><a href="#questions-frequentes" className="text-[14px] text-bleu-france hover:underline">Questions fr\u00e9quentes</a></li>
           </ul>
         </nav>
 
-        {/* Résumé rapide */}
+        {/* R\u00e9sum\u00e9 rapide */}
         <div className="bg-white border border-gris-bordure rounded-card p-6 mb-8">
-          <h2 className="text-h2 text-gris-titre mb-4">En résumé</h2>
+          <h2 className="text-h2 text-gris-titre mb-4">En r\u00e9sum\u00e9</h2>
           <ul className="space-y-2 text-body text-gris-texte">
             <li className="flex gap-2">
               <span className="text-bleu-france font-bold flex-shrink-0">&bull;</span>
@@ -184,11 +184,11 @@ export default function GuideTypePage({ params }: PageProps) {
             </li>
             <li className="flex gap-2">
               <span className="text-bleu-france font-bold flex-shrink-0">&bull;</span>
-              <span>Portail de contestation : <strong>{type.portail === "antai" ? "ANTAI (antai.gouv.fr)" : "Portail de la commune concernée"}</strong></span>
+              <span>Portail de contestation : <strong>{type.portail === "antai" ? "ANTAI (antai.gouv.fr)" : "Portail de la commune concern\u00e9e"}</strong></span>
             </li>
             <li className="flex gap-2">
               <span className="text-bleu-france font-bold flex-shrink-0">&bull;</span>
-              <span>Délai légal : <strong>{type.delaiJours} jours</strong> à compter de l&apos;envoi de l&apos;avis</span>
+              <span>D\u00e9lai l\u00e9gal : <strong>{type.delaiJours} jours</strong> \u00e0 compter de l&apos;envoi de l&apos;avis</span>
             </li>
           </ul>
         </div>
@@ -198,14 +198,14 @@ export default function GuideTypePage({ params }: PageProps) {
           <h2 className="text-h2 text-gris-titre mb-4">Ce que vous devez savoir</h2>
           <div className="space-y-3 text-body text-gris-texte">
             <p>
-              Une {type.label.toLowerCase()} peut être contestée dans un délai de {type.delaiJours} jours.
-              Ce délai court à compter de la date d&apos;envoi de l&apos;avis de contravention,
-              et non de sa réception.
+              Une {type.label.toLowerCase()} peut \u00eatre contest\u00e9e dans un d\u00e9lai de {type.delaiJours} jours.
+              Ce d\u00e9lai court \u00e0 compter de la date d&apos;envoi de l&apos;avis de contravention,
+              et non de sa r\u00e9ception.
             </p>
             <p>
-              Le montant forfaitaire est de {type.montantForfaitaire}&nbsp;&euro;. Il peut être minoré
-              à {Math.round(type.montantForfaitaire * 0.75)}&nbsp;&euro; en cas de paiement dans les 15 jours,
-              ou majoré à {type.montantForfaitaire * 2.5 > 375 ? 375 : Math.round(type.montantForfaitaire * 2.5)}&nbsp;&euro;
+              Le montant forfaitaire est de {type.montantForfaitaire}&nbsp;&euro;. Il peut \u00eatre minor\u00e9
+              \u00e0 {Math.round(type.montantForfaitaire * 0.75)}&nbsp;&euro; en cas de paiement dans les 15 jours,
+              ou major\u00e9 \u00e0 {type.montantForfaitaire * 2.5 > 375 ? 375 : Math.round(type.montantForfaitaire * 2.5)}&nbsp;&euro;
               en cas de non-paiement et non-contestation.
             </p>
             <p>
@@ -214,8 +214,8 @@ export default function GuideTypePage({ params }: PageProps) {
             </p>
             {type.pointsRetrait > 0 && (
               <p>
-                En cas de contestation acceptée, les {type.pointsRetrait} point{type.pointsRetrait > 1 ? "s" : ""} retiré{type.pointsRetrait > 1 ? "s" : ""} seront
-                restitué{type.pointsRetrait > 1 ? "s" : ""} sur votre permis de conduire.
+                En cas de contestation accept\u00e9e, les {type.pointsRetrait} point{type.pointsRetrait > 1 ? "s" : ""} retir\u00e9{type.pointsRetrait > 1 ? "s" : ""} seront
+                restitu\u00e9{type.pointsRetrait > 1 ? "s" : ""} sur votre permis de conduire.
               </p>
             )}
           </div>
@@ -244,7 +244,7 @@ export default function GuideTypePage({ params }: PageProps) {
                 </div>
                 <p className="text-body text-gris-texte mb-1">{motif.description}</p>
                 <p className="text-[13px] text-gris-mention">
-                  Référence : {motif.articleCode}
+                  R\u00e9f\u00e9rence : {motif.articleCode}
                 </p>
               </div>
             ))}
@@ -275,10 +275,10 @@ export default function GuideTypePage({ params }: PageProps) {
           <SourcesBadge />
         </div>
 
-        {/* CTA intermédiaire */}
+        {/* CTA interm\u00e9diaire */}
         <div className="bg-bleu-fond border border-bleu-clair rounded-card p-6 text-center my-8">
           <p className="text-body font-bold text-gris-titre mb-3">
-            Vous avez reçu ce type d&apos;amende ?
+            Vous avez re\u00e7u ce type d&apos;amende ?
           </p>
           <a href="/contest/upload" className="inline-block bg-bleu-france text-white font-bold py-3 px-6 rounded-button hover:bg-bleu-france-hover transition-colors min-h-[48px]">
             Analyser mon amende gratuitement
@@ -311,7 +311,7 @@ export default function GuideTypePage({ params }: PageProps) {
                 rel="noopener noreferrer"
                 className="text-bleu-france underline hover:text-bleu-france-hover"
               >
-                Accéder au site officiel de l&apos;ANTAI &rarr;
+                Acc\u00e9der au site officiel de l&apos;ANTAI &rarr;
               </a>
             </p>
           )}
@@ -319,7 +319,7 @@ export default function GuideTypePage({ params }: PageProps) {
 
         {/* FAQ */}
         <section id="questions-frequentes" className="mb-8">
-          <h2 className="text-h2 text-gris-titre mb-4">Questions fréquentes</h2>
+          <h2 className="text-h2 text-gris-titre mb-4">Questions fr\u00e9quentes</h2>
           <div className="space-y-4">
             {faq.slice(0, 2).map((item, i) => (
               <div key={i} className="bg-white border border-gris-bordure rounded-card p-4">
@@ -343,25 +343,25 @@ export default function GuideTypePage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* Guides éditoriaux */}
+        {/* Guides \u00e9ditoriaux */}
         <GuidesEditoriaux />
 
         {/* Author + Sources */}
         <AuthorBox />
 
-        {/* Date de mise à jour visible */}
+        {/* Date de mise \u00e0 jour visible */}
         <p className="text-[12px] text-gris-mention mt-4 mb-8">
-          Dernière mise à jour : {new Date(dateModified).toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}
+          Derni\u00e8re mise \u00e0 jour : {new Date(dateModified).toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}
         </p>
 
-        {/* Liste des départements */}
+        {/* Liste des d\u00e9partements */}
         <section className="mb-8">
           <h2 className="text-h2 text-gris-titre mb-4">
-            Guides par département
+            Guides par d\u00e9partement
           </h2>
           <p className="text-body text-gris-texte mb-4">
-            Sélectionnez votre département pour obtenir un guide personnalisé
-            avec le tribunal compétent et les démarches spécifiques.
+            S\u00e9lectionnez votre d\u00e9partement pour obtenir un guide personnalis\u00e9
+            avec le tribunal comp\u00e9tent et les d\u00e9marches sp\u00e9cifiques.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
             {departements.map((dept) => (
@@ -379,7 +379,7 @@ export default function GuideTypePage({ params }: PageProps) {
         {/* CTA */}
         <div className="bg-bleu-fond rounded-card p-8 text-center">
           <h2 className="text-h2 text-gris-titre mb-3">
-            Vous avez reçu une {type.label.toLowerCase()} ?
+            Vous avez re\u00e7u une {type.label.toLowerCase()} ?
           </h2>
           <p className="text-body text-gris-texte mb-6">
             Analysez gratuitement vos chances de contestation en moins de 60 secondes.

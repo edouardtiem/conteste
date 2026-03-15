@@ -19,6 +19,16 @@ Backlog priorise. Source de verite pour "qu'est-ce qu'on fait ensuite".
 - [ ] **Régénérer toutes les clés API** — `todo` — Anthropic, Stripe, Resend, Supabase. Les clés actuelles ont été exposées pendant la session de setup initiale.
 - [ ] **Supprimer le token Vercel temporaire** — `todo` — créé pendant le setup.
 
+## P0.5 — SEO Améliorations V2
+
+→ [ADR-005](decisions/005-seo-ameliorations-v2.md)
+
+- [x] **Chantier 1 — Bugs critiques** — `done` — Accents corrigés (`geo-content.ts`), helper `prepositionDept()` créé (`lib/geo.ts`), capitalisation titles fixée, typo "exération" → "exonération"
+- [ ] **Chantier 2 — Enrichissement contenu** — `todo` — Supprimer stats inventées, ajouter contexte local factuel, encart conseil ANTAI
+- [ ] **Chantier 3 — Bloc conversion SEO** — `todo` — Nouveau bloc "Comment maximiser ses chances" + CTA intégré
+- [ ] **Chantier 4 — Polish SEO** — `todo` — Meta descriptions < 160 chars, titles avec année, ToC collapsible mobile, liens internes
+- [ ] **Chantier 5 — Vérifications post-deploy** — `todo` — Script de vérification automatisé
+
 ## P1 — Lancement credible
 
 - [x] **Email confirmation paiement** — `done` — auto-envoi Resend dès que le pack se charge (plus besoin de clic), bouton "Renvoyer" disponible. Template, route API, logging DB tous opérationnels.
@@ -47,4 +57,4 @@ Backlog priorise. Source de verite pour "qu'est-ce qu'on fait ensuite".
 
 ---
 
-*Dernière mise à jour : 2026-03-13 (session 2 — email auto-send + webhook Stripe configuré)*
+*Dernière mise à jour : 2026-03-15 (session — SEO V2 Chantier 1 bugs critiques)*
